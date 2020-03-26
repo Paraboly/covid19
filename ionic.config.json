@@ -1,0 +1,7 @@
+{
+  "name": "covid-19.paraboly",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "react"
+}

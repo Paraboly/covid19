@@ -1,4 +1,5 @@
 import React from "react";
+import Stories from 'react-insta-stories';
 import {
   IonHeader,
   IonToolbar,
@@ -12,6 +13,7 @@ import { Location } from "../../models/Location";
 import { connect } from "../../data/connect";
 import * as selectors from "../../data/selectors";
 import "./MapView.scss";
+import STORIES from './Stories.mock';
 
 interface OwnProps { }
 
@@ -37,6 +39,12 @@ const MapView: React.FC<MapViewProps> = ({ locations, mapCenter }) => {
       </IonHeader>
 
       <IonContent class="map-page">
+        <Stories
+          stories={STORIES}
+          defaultInterval={1500}
+          width={432}
+          height={768}
+        />
         There will be map web component
             </IonContent>
     </IonPage>

@@ -10,22 +10,17 @@ import {
 import { Time } from "./Time";
 import { Session } from "../models/Session";
 
-interface SessionListItemProps {
-    session: Session;
-    listType: "all" | "favorites";
+interface ListItemProps {
+    entity: {};
     onAddFavorite: (id: number) => void;
     onRemoveFavorite: (id: number) => void;
-    onShowAlert: (header: string, buttons: AlertButton[]) => void;
     isFavorite: boolean;
 }
 
-const SessionListItem: React.FC<SessionListItemProps> = ({
+const ListItem: React.FC<ListItemProps> = ({
     isFavorite,
     onAddFavorite,
-    onRemoveFavorite,
-    onShowAlert,
-    session,
-    listType
+    onRemoveFavorite
 }) => {
     const ionItemSlidingRef = useRef<HTMLIonItemSlidingElement>(null);
 
@@ -103,4 +98,4 @@ const SessionListItem: React.FC<SessionListItemProps> = ({
     );
 };
 
-export default React.memo(SessionListItem);
+export default React.memo(ListItem);

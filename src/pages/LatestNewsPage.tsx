@@ -26,7 +26,7 @@ import * as selectors from "../data/selectors";
 import { setSearchText } from "../data/sessions/sessions.actions";
 import ShareSocialFab from "../components/ShareSocialFab";
 import { SessionGroup } from "../models/SessionGroup";
-import { SessionService } from "../services/SessionService";
+import { PlumbingService } from "../services/PlumbingService";
 
 interface OwnProps {}
 
@@ -60,7 +60,7 @@ const LatestNewsPage: React.FC<LatestNewsPageProps> = ({
     };
 
     const getCOVID19 = async () => {
-        const byCountry = await SessionService.getAllCountryStats();
+        const byCountry = await PlumbingService.getAllCountryStats();
         console.log(byCountry);
         return byCountry;
     };

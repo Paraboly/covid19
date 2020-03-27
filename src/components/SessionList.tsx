@@ -9,7 +9,7 @@ import {
 } from "@ionic/react";
 import React, { useState, useCallback } from "react";
 import { Session } from "../models/Session";
-import SessionListItem from "./SessionListItem";
+import ListItem from "./ListItem";
 import { SessionGroup } from "../models/SessionGroup";
 import { Time } from "../components/Time";
 import { connect } from "../data/connect";
@@ -75,7 +75,7 @@ const SessionList: React.FC<SessionListProps> = ({
                         </IonItemDivider>
                         {group.sessions.map(
                             (session: Session, sessionIndex: number) => (
-                                <SessionListItem
+                                <ListItem
                                     onShowAlert={handleShowAlert}
                                     isFavorite={
                                         favoriteSessions.indexOf(session.id) >

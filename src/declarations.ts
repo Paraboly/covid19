@@ -1,5 +1,5 @@
 export interface AppPage {
-  url: string;
-  icon: object;
-  title: string;
+    url: string;
+    icon: object;
+    title: string;
 }

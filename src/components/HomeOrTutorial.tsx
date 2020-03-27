@@ -1,18 +1,22 @@
-import React from 'react';
-import { connect } from '../data/connect';
-import { Redirect } from 'react-router';
+import React from "react";
+import { connect } from "../data/connect";
+import { Redirect } from "react-router";
 
 interface StateProps {
-  hasSeenTutorial: boolean;
+    hasSeenTutorial: boolean;
 }
 
 const HomeOrTutorial: React.FC<StateProps> = ({ hasSeenTutorial }) => {
-  return hasSeenTutorial ? <Redirect to="/tabs/map" /> : <Redirect to="/tutorial" />
+    return hasSeenTutorial ? (
+        <Redirect to="/tabs/map" />
+    ) : (
+        <Redirect to="/tutorial" />
+    );
 };
 
 export default connect<{}, StateProps, {}>({
-  mapStateToProps: (state) => ({
-    hasSeenTutorial: state.user.hasSeenTutorial
-  }),
-  component: HomeOrTutorial
+    mapStateToProps: state => ({
+        hasSeenTutorial: state.user.hasSeenTutorial
+    }),
+    component: HomeOrTutorial
 });

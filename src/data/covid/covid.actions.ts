@@ -1,6 +1,6 @@
 import { getConfData } from "../dataApi";
 import { ActionType } from "../../util/types";
-import { SessionsState } from "./sessions.state";
+import { CovidState } from "./covid.state";
 
 export const loadConfData = () => async (dispatch: React.Dispatch<any>) => {
     dispatch(setLoading(true));
@@ -15,7 +15,7 @@ export const setLoading = (isLoading: boolean) =>
         isLoading
     } as const);
 
-export const setData = (data: Partial<SessionsState>) =>
+export const setData = (data: Partial<CovidState>) =>
     ({
         type: "set-conf-data",
         data
@@ -39,7 +39,7 @@ export const setSearchText = (searchText?: string) =>
         searchText
     } as const);
 
-export type SessionsActions =
+export type CovidActions =
     | ActionType<typeof setLoading>
     | ActionType<typeof setData>
     | ActionType<typeof startWatching>

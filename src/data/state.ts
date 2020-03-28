@@ -1,5 +1,5 @@
 import { combineReducers } from "./combineReducers";
-import { sessionsReducer } from "./sessions/sessions.reducer";
+import { covidReducer } from "./covid/covid.reducer";
 import { userReducer } from "./user/user.reducer";
 
 export const initialState: AppState = {
@@ -19,7 +19,7 @@ export const initialState: AppState = {
 };
 
 export const reducers = combineReducers({
-    data: sessionsReducer,
+    data: covidReducer,
     user: userReducer
 });
 

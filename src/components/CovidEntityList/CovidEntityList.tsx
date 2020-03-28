@@ -1,10 +1,7 @@
 import { IonList, IonListHeader } from "@ionic/react";
 import React from "react";
 import { connect } from "../../data/connect";
-import {
-    startWatching,
-    stopWatching
-} from "../../data/sessions/sessions.actions";
+import { startWatching, stopWatching } from "../../data/covid/covid.actions";
 import CovidCard from "../CovidCard/CovidCard";
 import { CovidEntity } from "../../models/CovidEntity";
 

@@ -21,7 +21,7 @@ import { options } from "ionicons/icons";
 import CovidEntityList from "../../components/CovidEntityList/CovidEntityList";
 import "./CovidDetails.scss";
 import * as selectors from "../../data/selectors";
-import { setSearchText } from "../../data/sessions/sessions.actions";
+import { setSearchText } from "../../data/covid/covid.actions";
 import ShareSocialFab from "../../components/ShareSocialFab";
 import { SessionService } from "../../services/SessionService";
 import { CovidEntity } from "../../models/CovidEntity";

@@ -1,4 +1,4 @@
-📽 🦠 😷 COVID-19
+📽🦠😷 COVID-19
 
 You can see a live Development here. (https://covid19-paraboly.netlify.com/)
 

@@ -17,16 +17,16 @@ import {
     IonHeader,
     getConfig
 } from "@ionic/react";
-import { connect } from "../data/connect";
+import { connect } from "../../data/connect";
 import { options } from "ionicons/icons";
-import SessionList from "../components/SessionList";
-import SessionListFilter from "../components/SessionListFilter";
-import "./LatestNewsPage.scss";
-import * as selectors from "../data/selectors";
-import { setSearchText } from "../data/sessions/sessions.actions";
-import ShareSocialFab from "../components/ShareSocialFab";
-import { SessionGroup } from "../models/SessionGroup";
-import { SessionService } from "../services/SessionService";
+import SessionList from "../../components/SessionList";
+import SessionListFilter from "../../components/SessionListFilter";
+import "./CovidDetails.scss";
+import * as selectors from "../../data/selectors";
+import { setSearchText } from "../../data/sessions/sessions.actions";
+import ShareSocialFab from "../../components/ShareSocialFab";
+import { SessionGroup } from "../../models/SessionGroup";
+import { SessionService } from "../../services/SessionService";
 
 interface OwnProps {}
 
@@ -66,7 +66,7 @@ const LatestNewsPage: React.FC<LatestNewsPageProps> = ({
     };
 
     return (
-        <IonPage id="latestNews-page">
+        <IonPage id="covidDetails-page">
             <IonHeader>
                 <IonToolbar>
                     <IonButtons slot="start">

@@ -31,7 +31,7 @@ import { setDarkMode } from "../data/user/user.actions";
 const routes = {
     appPages: [
         { title: "Map", path: "/tabs/map", icon: map },
-        { title: "List", path: "/tabs/latestNews", icon: listBox },
+        { title: "List", path: "/tabs/covidDetails", icon: listBox },
         { title: "About", path: "/tabs/about", icon: informationCircle }
     ],
     loggedInPages: [
@@ -76,7 +76,11 @@ const Menu: React.FC<MenuProps> = ({
             .filter(route => !!route.path)
             .map(p => (
                 <IonMenuToggle key={p.title} auto-hide="false">
-                    <IonItem button={true} routerLink={p.path} routerDirection="none">
+                    <IonItem
+                        button={true}
+                        routerLink={p.path}
+                        routerDirection="none"
+                    >
                         <IonIcon slot="start" icon={p.icon} />
                         <IonLabel>{p.title}</IonLabel>
                     </IonItem>

@@ -72,7 +72,7 @@ const SessionListItem: React.FC<SessionListItemProps> = ({
             ref={ionItemSlidingRef}
             class={"track-" + session.tracks[0].toLowerCase()}
         >
-            <IonItem routerLink={`/tabs/latestNews/${session.id}`}>
+            <IonItem routerLink={`/tabs/covidDetails/${session.id}`}>
                 <IonLabel>
                     <h3>{session.name}</h3>
                     <p>

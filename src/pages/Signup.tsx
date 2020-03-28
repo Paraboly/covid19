@@ -54,7 +54,7 @@ const Login: React.FC<LoginProps> = ({
         if (username && password) {
             await setIsLoggedIn(true);
             await setUsernameAction(username);
-            history.push("/tabs/latestNews", { direction: "none" });
+            history.push("/tabs/covidDetails", { direction: "none" });
         }
     };
 
@@ -63,7 +63,7 @@ const Login: React.FC<LoginProps> = ({
             <IonHeader>
                 <IonToolbar>
                     <IonButtons slot="start">
-                        <IonMenuButton/>
+                        <IonMenuButton />
                     </IonButtons>
                     <IonTitle>Signup</IonTitle>
                 </IonToolbar>

@@ -1,0 +1,7 @@
+#covidDetails-page {
+    // TODO: The border color and padding will change on whether the entity is country or province
+    ion-item-sliding.covidEntity ion-label {
+        border-left: 2px solid var(--ion-color-primary);
+        padding-left: 10px;
+    }
+}

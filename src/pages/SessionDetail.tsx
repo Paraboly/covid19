@@ -61,23 +61,18 @@ const SessionDetail: React.FC<SessionDetailProps> = ({
             <IonHeader>
                 <IonToolbar>
                     <IonButtons slot="start">
-                        <IonBackButton defaultHref="/tabs/latestNews"/>
+                        <IonBackButton defaultHref="/tabs/covidDetails" />
                     </IonButtons>
                     <IonButtons slot="end">
                         <IonButton onClick={() => toggleFavorite()}>
                             {isFavorite ? (
-                                
-                                <IonIcon slot="icon-only" icon={star}/>
+                                <IonIcon slot="icon-only" icon={star} />
                             ) : (
-                                
-                                <IonIcon
-                                    slot="icon-only"
-                                    icon={starOutline}
-                                />
+                                <IonIcon slot="icon-only" icon={starOutline} />
                             )}
                         </IonButton>
                         <IonButton onClick={() => shareSession}>
-                            <IonIcon slot="icon-only" icon={share}/>
+                            <IonIcon slot="icon-only" icon={share} />
                         </IonButton>
                     </IonButtons>
                 </IonToolbar>
@@ -102,7 +97,10 @@ const SessionDetail: React.FC<SessionDetailProps> = ({
                     </IonText>
                 </div>
                 <IonList>
-                    <IonItem onClick={() => sessionClick("watch")} button={true}>
+                    <IonItem
+                        onClick={() => sessionClick("watch")}
+                        button={true}
+                    >
                         <IonLabel color="primary">Watch</IonLabel>
                     </IonItem>
                     <IonItem

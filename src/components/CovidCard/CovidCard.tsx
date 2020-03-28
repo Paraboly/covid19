@@ -7,11 +7,7 @@ import {
     IonItemOption
 } from "@ionic/react";
 import { Time } from "../Time";
-
-interface CovidEntity {
-    name: string;
-    lastUpdated: string;
-}
+import { CovidEntity } from "../../models/CovidEntity";
 
 interface CovidCardProps {
     entity: CovidEntity;

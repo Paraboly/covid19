@@ -1,3 +1,8 @@
-# Ionic React Conference Demo App
+📽 🦠 😷 COVID-19
 
-You can see a live demo here. (https://ionic-react-conference-app.firebaseapp.com/)
+You can see a live Development here. (https://covid19-paraboly.netlify.com/)
+
+-   [] Add readme
+-   [] Add licenses
+-   [] Remove unused scripts
+-   [] Refactor

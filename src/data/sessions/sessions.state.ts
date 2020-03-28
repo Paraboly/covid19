@@ -1,12 +1,12 @@
 import { Location } from "../../models/Location";
 import { Speaker } from "../../models/Speaker";
-import { Session } from "../../models/Session";
+import { CovidEntity } from "../../models/CovidEntity";
 export interface SessionsState {
-    sessions: Session[];
+    covidEntities: CovidEntity[];
     speakers: Speaker[];
-    favorites: number[];
+    watchingCovidEntityNames: string[];
+    // filteredTracks: string[];
     locations: Location[];
-    filteredTracks: string[];
     searchText?: string;
     mapCenterId?: number;
     loading?: boolean;

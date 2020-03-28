@@ -21,16 +21,16 @@ export const setData = (data: Partial<SessionsState>) =>
         data
     } as const);
 
-export const addFavorite = (sessionId: number) =>
+export const startWatching = (entityName: string) =>
     ({
         type: "add-favorite",
-        sessionId
+        entityName
     } as const);
 
-export const removeFavorite = (sessionId: number) =>
+export const stopWatching = (entityName: string) =>
     ({
         type: "remove-favorite",
-        sessionId
+        entityName
     } as const);
 
 export const updateFilteredTracks = (filteredTracks: string[]) =>
@@ -48,7 +48,7 @@ export const setSearchText = (searchText?: string) =>
 export type SessionsActions =
     | ActionType<typeof setLoading>
     | ActionType<typeof setData>
-    | ActionType<typeof addFavorite>
-    | ActionType<typeof removeFavorite>
+    | ActionType<typeof startWatching>
+    | ActionType<typeof stopWatching>
     | ActionType<typeof updateFilteredTracks>
     | ActionType<typeof setSearchText>;

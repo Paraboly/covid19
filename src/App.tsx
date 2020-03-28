@@ -34,7 +34,7 @@ import {
 } from "./data/user/user.actions";
 import Tutorial from "./pages/Tutorial";
 import HomeOrTutorial from "./components/HomeOrTutorial";
-import { Session } from "./models/Session";
+import { CovidEntity } from "./models/CovidEntity";
 
 const App: React.FC = () => {
     return (
@@ -46,7 +46,7 @@ const App: React.FC = () => {
 
 interface StateProps {
     darkMode: boolean;
-    sessions: Session[];
+    covidEntities: CovidEntity[];
 }
 
 interface DispatchProps {
@@ -60,7 +60,7 @@ interface IonicAppProps extends StateProps, DispatchProps {}
 
 const IonicApp: React.FC<IonicAppProps> = ({
     darkMode,
-    sessions,
+    covidEntities,
     setIsLoggedIn,
     setUsername,
     loadConfData,
@@ -72,8 +72,8 @@ const IonicApp: React.FC<IonicAppProps> = ({
         // eslint-disable-next-line
     }, []);
 
-    return sessions.length === 0 ? (
-        <div></div>
+    return covidEntities.length === 0 ? (
+        <div>No Covid Entities Found</div>
     ) : (
         <IonApp className={`${darkMode ? "dark-theme" : ""}`}>
             <IonReactRouter>
@@ -107,7 +107,7 @@ export default App;
 const IonicAppConnected = connect<{}, StateProps, DispatchProps>({
     mapStateToProps: state => ({
         darkMode: state.user.darkMode,
-        sessions: state.data.sessions
+        covidEntities: state.data.covidEntities
     }),
     mapDispatchToProps: {
         loadConfData,

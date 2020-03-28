@@ -15,19 +15,25 @@ export const sessionsReducer = (
         case "add-favorite": {
             return {
                 ...state,
-                favorites: [...state.favorites, action.sessionId]
+                watchingCovidEntityNames: [
+                    ...state.watchingCovidEntityNames,
+                    action.entityName
+                ]
             };
         }
         case "remove-favorite": {
             return {
                 ...state,
-                favorites: [
-                    ...state.favorites.filter(x => x !== action.sessionId)
+                watchingCovidEntityNames: [
+                    ...state.watchingCovidEntityNames.filter(
+                        x => x !== action.entityName
+                    )
                 ]
             };
         }
         case "update-filtered-tracks": {
-            return { ...state, filteredTracks: action.filteredTracks };
+            // return { ...state, filteredTracks: action.filteredTracks };
+            return state;
         }
         case "set-search-text": {
             return { ...state, searchText: action.searchText };

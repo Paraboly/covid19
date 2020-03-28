@@ -13,26 +13,24 @@ import {
     IonRefresher,
     IonRefresherContent,
     IonToast,
-    IonModal,
     IonHeader,
     getConfig
 } from "@ionic/react";
 import { connect } from "../../data/connect";
 import { options } from "ionicons/icons";
-import SessionList from "../../components/SessionList";
-import SessionListFilter from "../../components/SessionListFilter";
+import CovidEntityList from "../../components/CovidEntityList/CovidEntityList";
 import "./CovidDetails.scss";
 import * as selectors from "../../data/selectors";
 import { setSearchText } from "../../data/sessions/sessions.actions";
 import ShareSocialFab from "../../components/ShareSocialFab";
-import { SessionGroup } from "../../models/SessionGroup";
 import { SessionService } from "../../services/SessionService";
+import { CovidEntity } from "../../models/CovidEntity";
 
 interface OwnProps {}
 
 interface StateProps {
-    sessionGroups: SessionGroup[];
-    favoriteGroups: SessionGroup[];
+    covidEntities: CovidEntity[];
+    watchingCovidEntities: CovidEntity[];
     mode: "ios" | "md";
 }
 
@@ -43,13 +41,13 @@ interface DispatchProps {
 type LatestNewsPageProps = OwnProps & StateProps & DispatchProps;
 
 const LatestNewsPage: React.FC<LatestNewsPageProps> = ({
-    favoriteGroups,
-    sessionGroups,
+    watchingCovidEntities,
+    covidEntities,
     setSearchText,
     mode
 }) => {
     const [segment, setSegment] = useState<"all" | "favorites">("all");
-    const [showFilterModal, setShowFilterModal] = useState(false);
+    const [, setShowFilterModal] = useState(false);
     const ionRefresherRef = useRef<HTMLIonRefresherElement>(null);
     const [showCompleteToast, setShowCompleteToast] = useState(false);
 
@@ -126,27 +124,17 @@ const LatestNewsPage: React.FC<LatestNewsPageProps> = ({
                     onDidDismiss={() => setShowCompleteToast(false)}
                 />
 
-                <SessionList
-                    sessionGroups={sessionGroups}
+                <CovidEntityList
+                    sessionGroups={covidEntities}
                     listType={segment}
                     hide={segment === "favorites"}
                 />
-                <SessionList
-                    sessionGroups={favoriteGroups}
+                <CovidEntityList
+                    sessionGroups={watchingCovidEntities}
                     listType={segment}
                     hide={segment === "all"}
                 />
             </IonContent>
-
-            <IonModal
-                isOpen={showFilterModal}
-                onDidDismiss={() => setShowFilterModal(false)}
-            >
-                <SessionListFilter
-                    onDismissModal={() => setShowFilterModal(false)}
-                />
-            </IonModal>
-
             <ShareSocialFab />
         </IonPage>
     );
@@ -154,8 +142,8 @@ const LatestNewsPage: React.FC<LatestNewsPageProps> = ({
 
 export default connect<OwnProps, StateProps, DispatchProps>({
     mapStateToProps: state => ({
-        sessionGroups: selectors.getGroupedSessions(state),
-        favoriteGroups: selectors.getGroupedFavorites(state),
+        covidEntities: selectors.getCovidEntities(state),
+        watchingCovidEntities: selectors.getWatchingCovidEntities(state),
         mode: getConfig()!.get("mode")
     }),
     mapDispatchToProps: {

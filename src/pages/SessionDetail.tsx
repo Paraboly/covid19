@@ -19,7 +19,7 @@ import * as selectors from "../data/selectors";
 import { starOutline, star, share, cloudDownload } from "ionicons/icons";
 import "./SessionDetail.scss";
 import { Time } from "../components/Time";
-import { addFavorite, removeFavorite } from "../data/sessions/sessions.actions";
+import { startWatching, stopWatching } from "../data/sessions/sessions.actions";
 import { Session } from "../models/Session";
 
 interface OwnProps extends RouteComponentProps {}
@@ -30,8 +30,8 @@ interface StateProps {
 }
 
 interface DispatchProps {
-    addFavorite: typeof addFavorite;
-    removeFavorite: typeof removeFavorite;
+    addFavorite: typeof startWatching;
+    removeFavorite: typeof stopWatching;
 }
 
 type SessionDetailProps = OwnProps & StateProps & DispatchProps;
@@ -49,7 +49,7 @@ const SessionDetail: React.FC<SessionDetailProps> = ({
     const isFavorite = favoriteSessions.indexOf(session.id) > -1;
 
     const toggleFavorite = () => {
-        isFavorite ? removeFavorite(session.id) : addFavorite(session.id);
+        // isFavorite ? removeFavorite(session.id) : addFavorite(session.id);
     };
     const shareSession = () => {};
     const sessionClick = (text: string) => {
@@ -140,13 +140,13 @@ const SessionDetail: React.FC<SessionDetailProps> = ({
 };
 
 export default connect<OwnProps, StateProps, DispatchProps>({
-    mapStateToProps: (state, OwnProps) => ({
-        session: selectors.getSession(state, OwnProps),
-        favoriteSessions: state.data.favorites
-    }),
+    // mapStateToProps: (state, OwnProps) => ({
+    //     session: selectors.getSession(state, OwnProps),
+    //     favoriteSessions: state.data.watchingCovidEntityNames
+    // }),
     mapDispatchToProps: {
-        addFavorite,
-        removeFavorite
+        addFavorite: startWatching,
+        removeFavorite: stopWatching
     },
     component: withRouter(SessionDetail)
 });

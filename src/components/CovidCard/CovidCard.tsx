@@ -10,24 +10,24 @@ import { Time } from "../Time";
 import { CovidEntity } from "../../models/CovidEntity";
 
 interface CovidCardProps {
-    entity: CovidEntity;
+    covidEntity: CovidEntity;
     isFavorite: boolean;
-    onStartWatching: (entity: CovidEntity) => void;
-    onStopWatching: (entity: CovidEntity) => void;
+    onStartWatching: (entityName: string) => void;
+    onStopWatching: (entityName: string) => void;
 }
 
 const CovidCard: React.FC<CovidCardProps> = ({
     isFavorite: isWatching,
     onStartWatching,
     onStopWatching,
-    entity
+    covidEntity: entity
 }) => {
     const stopWatching = () => {
-        onStopWatching(entity);
+        onStopWatching(entity.name);
     };
 
     const startWatching = () => {
-        onStartWatching(entity);
+        onStartWatching(entity.name);
     };
 
     return (

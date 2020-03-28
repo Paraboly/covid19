@@ -13,7 +13,23 @@ import { Location } from "../../models/Location";
 import { connect } from "../../data/connect";
 import * as selectors from "../../data/selectors";
 import "./MapView.scss";
-import STORIES from './Stories.mock';
+//import STORIES from './Stories.mock';
+
+const STORIES: any = [{
+  header: {
+    heading: "Turkey",
+    subheading: "Posted 5h ago",
+    profileImage: "https://picsum.photos/1000/1000"
+  },
+  content: ""
+}, {
+  header: {
+    heading: "Italy",
+    subheading: "Posted 2h ago",
+    profileImage: "https://picsum.photos/1000/1000"
+  },
+  content: ""
+}];
 
 interface OwnProps { }
 
@@ -39,14 +55,14 @@ const MapView: React.FC<MapViewProps> = ({ locations, mapCenter }) => {
       </IonHeader>
 
       <IonContent class="map-page">
-        <Stories
-          stories={STORIES}
-          defaultInterval={1500}
-          width={432}
-          height={768}
-        />
-        There will be map web component
-            </IonContent>
+        <div className="story-panel">
+          <Stories
+            stories={STORIES}
+            defaultInterval={20000}
+            loop={true}
+          />
+        </div>
+      </IonContent>
     </IonPage>
   );
 };

@@ -1,34 +1,17 @@
 [
     {
         "name": "Turkey",
-        "lastUpdated": "2020-03-27 04:09:46"
+        "lastUpdated": "2020-03-27 04:09:46",
+        "provinces": ["Ankara", "Istanbul"]
     },
     {
         "name": "Canada",
-        "lastUpdated": "2020-03-26 11:25:16"
+        "lastUpdated": "2020-03-26 11:25:16",
+        "provinces": ["Ontario", "Toronto"]
     },
     {
         "name": "US",
-        "lastUpdated": "2020-03-25 06:32:45"
-    },
-    {
-        "name": "California",
-        "lastUpdated": "2020-03-24 06:32:45"
-    },
-    {
-        "name": "Ontario",
-        "lastUpdated": "2020-03-23 06:32:45"
-    },
-    {
-        "name": "Ankara",
-        "lastUpdated": "2020-03-22 06:32:45"
-    },
-    {
-        "name": "Italy",
-        "lastUpdated": "2020-03-21 06:32:45"
-    },
-    {
-        "name": "Rome",
-        "lastUpdated": "2020-03-20 06:32:45"
+        "lastUpdated": "2020-03-25 06:32:45",
+        "provinces": ["California", "DC"]
     }
 ]

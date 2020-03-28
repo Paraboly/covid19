@@ -14,7 +14,7 @@ interface OwnProps {
 }
 
 interface StateProps {
-    watchingEntityNames: string[];
+    watchingCovidEntityNames: string[];
 }
 
 interface DispatchProps {
@@ -28,7 +28,7 @@ const CovidEntityList: React.FC<CovidEntityListProps> = ({
     startWatching: addFavorite,
     stopWatching: removeFavorite,
     covidEntities,
-    watchingEntityNames,
+    watchingCovidEntityNames,
     hide
 }) => {
     if (covidEntities.length === 0 && !hide) {
@@ -46,7 +46,8 @@ const CovidEntityList: React.FC<CovidEntityListProps> = ({
                     <CovidCard
                         covidEntity={covidEntity}
                         isFavorite={
-                            watchingEntityNames.indexOf(covidEntity.name) > -1
+                            watchingCovidEntityNames.indexOf(covidEntity.name) >
+                            -1
                         }
                         onStartWatching={addFavorite}
                         onStopWatching={removeFavorite}
@@ -54,7 +55,6 @@ const CovidEntityList: React.FC<CovidEntityListProps> = ({
                     />
                 )
             )}
-            ))}
         </IonList>
     );
 };

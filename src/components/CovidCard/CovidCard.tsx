@@ -11,32 +11,32 @@ import { CovidEntity } from "../../models/CovidEntity";
 
 interface CovidCardProps {
     covidEntity: CovidEntity;
-    isFavorite: boolean;
+    isWatching: boolean;
     onStartWatching: (entityName: string) => void;
     onStopWatching: (entityName: string) => void;
 }
 
 const CovidCard: React.FC<CovidCardProps> = ({
-    isFavorite: isWatching,
+    isWatching,
     onStartWatching,
     onStopWatching,
-    covidEntity: entity
+    covidEntity
 }) => {
     const stopWatching = () => {
-        onStopWatching(entity.name);
+        onStopWatching(covidEntity.name);
     };
 
     const startWatching = () => {
-        onStartWatching(entity.name);
+        onStartWatching(covidEntity.name);
     };
 
     return (
         <IonItemSliding class={"covid-card"}>
             <IonItem>
                 <IonLabel>
-                    <h3>{entity.name}</h3>
+                    <h3>{covidEntity.name}</h3>
                     <p>
-                        <Time date={entity.lastUpdated} /> &mdash;&nbsp;
+                        <Time date={covidEntity.lastUpdated} /> &mdash;&nbsp;
                     </p>
                 </IonLabel>
             </IonItem>

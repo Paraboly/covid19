@@ -22,8 +22,8 @@ interface DispatchProps {
 interface CovidEntityListProps extends OwnProps, StateProps, DispatchProps {}
 
 const CovidEntityList: React.FC<CovidEntityListProps> = ({
-    startWatching: addFavorite,
-    stopWatching: removeFavorite,
+    startWatching,
+    stopWatching,
     covidEntities,
     watchingCovidEntityNames,
     hide
@@ -42,12 +42,12 @@ const CovidEntityList: React.FC<CovidEntityListProps> = ({
                 (covidEntity: CovidEntity, entityIndex: number) => (
                     <CovidCard
                         covidEntity={covidEntity}
-                        isFavorite={
+                        isWatching={
                             watchingCovidEntityNames.indexOf(covidEntity.name) >
                             -1
                         }
-                        onStartWatching={addFavorite}
-                        onStopWatching={removeFavorite}
+                        onStartWatching={startWatching}
+                        onStopWatching={stopWatching}
                         key={`covid-entity-${entityIndex}`}
                     />
                 )
@@ -61,8 +61,8 @@ export default connect({
         watchingCovidEntityNames: state.data.watchingCovidEntityNames
     }),
     mapDispatchToProps: {
-        addFavorite: startWatching,
-        removeFavorite: stopWatching
+        startWatching,
+        stopWatching
     },
     component: CovidEntityList
 });

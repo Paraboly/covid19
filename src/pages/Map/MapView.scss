@@ -1,5 +1,5 @@
 #map-view {
-    .map-canvas {
+    pwc-map {
         position: absolute;
 
         height: 100%;
@@ -9,6 +9,11 @@
 
         opacity: 0;
         transition: opacity 250ms ease-in;
+        margin-top: -20px;
+    }
+
+    .show-map {
+        opacity: 1;
     }
 
     .map-page {
@@ -36,9 +41,5 @@
                 }
             }
         }
-    }
-
-    .show-map {
-        opacity: 1;
     }
 }

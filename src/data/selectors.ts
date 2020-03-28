@@ -2,7 +2,6 @@ import { createSelector } from "reselect";
 import { AppState } from "./state";
 
 const getEntities = (state: AppState) => state.data.covidEntities;
-export const getSpeakers = (state: AppState) => state.data.speakers;
 const getWatchingEntityNames = (state: AppState) =>
     state.data.watchingCovidEntityNames;
 const getSearchText = (state: AppState) => state.data.searchText;

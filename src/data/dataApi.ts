@@ -1,13 +1,11 @@
 import { Plugins } from "@capacitor/core";
-import { Session } from "../models/Session";
-import { Speaker } from "../models/Speaker";
+import { CovidEntity } from "../models/CovidEntity";
 import { Location } from "../models/Location";
 
 const { Storage } = Plugins;
 
 const locationsUrl = "/assets/data/locations.json";
-const sessionsUrl = "/assets/data/sessions.json";
-const speakersUrl = "/assets/data/speakers.json";
+const testCovidDataUrl = "/assets/data/testCovidData.json";
 
 const HAS_LOGGED_IN = "hasLoggedIn";
 const HAS_SEEN_TUTORIAL = "hasSeenTutorial";
@@ -15,23 +13,16 @@ const USERNAME = "username";
 
 export const getConfData = async () => {
     const response = await Promise.all([
-        fetch(sessionsUrl),
         fetch(locationsUrl),
-        fetch(speakersUrl)
+        fetch(testCovidDataUrl)
     ]);
-    const sessions = (await response[0].json()) as Session[];
-    const locations = (await response[1].json()) as Location[];
-    const speakers = (await response[2].json()) as Speaker[];
-    const allTracks = sessions
-        .reduce((all, session) => all.concat(session.tracks), [] as string[])
-        .filter((trackName, index, array) => array.indexOf(trackName) === index)
-        .sort();
+
+    const locations = (await response[0].json()) as Location[];
+    const testCovidData = (await response[1].json()) as CovidEntity[];
+
     const data = {
-        sessions,
         locations,
-        speakers,
-        allTracks,
-        filteredTracks: [...allTracks]
+        covidEntities: testCovidData
     };
     return data;
 };
@@ -42,9 +33,9 @@ export const getUserData = async () => {
         Storage.get({ key: HAS_SEEN_TUTORIAL }),
         Storage.get({ key: USERNAME })
     ]);
-    const isLoggedin = (await response[0].value) === "true";
-    const hasSeenTutorial = (await response[1].value) === "true";
-    const username = (await response[2].value) || undefined;
+    const isLoggedin = response[0].value === "true";
+    const hasSeenTutorial = response[1].value === "true";
+    const username = response[2].value || undefined;
     const data = {
         isLoggedin,
         hasSeenTutorial,

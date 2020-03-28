@@ -10,7 +10,6 @@ import {
 import { Route, Redirect } from "react-router";
 import { map, informationCircle, listBox } from "ionicons/icons";
 import CovidDetails from "./CovidDetails/CovidDetails";
-import SessionDetail from "./SessionDetail";
 import MapView from "./Map/MapView";
 import About from "./About";
 
@@ -29,14 +28,6 @@ const MainTabs: React.FC<MainTabsProps> = () => {
                     path="/tabs/covidDetails"
                     render={() => <CovidDetails />}
                     exact={true}
-                />
-                <Route
-                    path="/tabs/covidDetails/:id"
-                    component={SessionDetail}
-                />
-                <Route
-                    path="/tabs/speakers/sessions/:id"
-                    component={SessionDetail}
                 />
                 <Route
                     path="/tabs/map"

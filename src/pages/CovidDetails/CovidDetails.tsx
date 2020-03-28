@@ -125,12 +125,12 @@ const LatestNewsPage: React.FC<LatestNewsPageProps> = ({
                 />
 
                 <CovidEntityList
-                    sessionGroups={covidEntities}
+                    covidEntities={covidEntities}
                     listType={segment}
                     hide={segment === "favorites"}
                 />
                 <CovidEntityList
-                    sessionGroups={watchingCovidEntities}
+                    covidEntities={watchingCovidEntities}
                     listType={segment}
                     hide={segment === "all"}
                 />

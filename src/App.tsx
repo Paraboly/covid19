@@ -73,7 +73,7 @@ const IonicApp: React.FC<IonicAppProps> = ({
     }, []);
 
     return covidEntities.length === 0 ? (
-        <div>No Covid Entities Found</div>
+        <div>Loading...</div>
     ) : (
         <IonApp className={`${darkMode ? "dark-theme" : ""}`}>
             <IonReactRouter>
@@ -81,10 +81,6 @@ const IonicApp: React.FC<IonicAppProps> = ({
                     <Menu />
                     <IonRouterOutlet id="main">
                         <Route path="/tabs" component={MainTabs} />
-                        {/* <Route path="/account" component={Account} />
-                <Route path="/login" component={Login} />
-                <Route path="/signup" component={Signup} />
-                <Route path="/support" component={Support} /> */}
                         <Route path="/tutorial" component={Tutorial} />
                         <Route
                             path="/logout"

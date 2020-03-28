@@ -5,11 +5,8 @@ import { userReducer } from "./user/user.reducer";
 export const initialState: AppState = {
     data: {
         covidEntities: [],
-        speakers: [],
         watchingCovidEntityNames: [],
         locations: [],
-        allTracks: [],
-        // filteredTracks: [],
         mapCenterId: 0,
         loading: false
     },

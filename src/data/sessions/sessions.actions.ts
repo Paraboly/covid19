@@ -23,20 +23,14 @@ export const setData = (data: Partial<SessionsState>) =>
 
 export const startWatching = (entityName: string) =>
     ({
-        type: "add-favorite",
+        type: "start-watching",
         entityName
     } as const);
 
 export const stopWatching = (entityName: string) =>
     ({
-        type: "remove-favorite",
+        type: "stop-watching",
         entityName
-    } as const);
-
-export const updateFilteredTracks = (filteredTracks: string[]) =>
-    ({
-        type: "update-filtered-tracks",
-        filteredTracks
     } as const);
 
 export const setSearchText = (searchText?: string) =>
@@ -50,5 +44,4 @@ export type SessionsActions =
     | ActionType<typeof setData>
     | ActionType<typeof startWatching>
     | ActionType<typeof stopWatching>
-    | ActionType<typeof updateFilteredTracks>
     | ActionType<typeof setSearchText>;

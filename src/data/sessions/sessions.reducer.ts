@@ -12,7 +12,7 @@ export const sessionsReducer = (
         case "set-conf-data": {
             return { ...state, ...action.data };
         }
-        case "add-favorite": {
+        case "start-watching": {
             return {
                 ...state,
                 watchingCovidEntityNames: [
@@ -21,7 +21,7 @@ export const sessionsReducer = (
                 ]
             };
         }
-        case "remove-favorite": {
+        case "stop-watching": {
             return {
                 ...state,
                 watchingCovidEntityNames: [
@@ -30,10 +30,6 @@ export const sessionsReducer = (
                     )
                 ]
             };
-        }
-        case "update-filtered-tracks": {
-            // return { ...state, filteredTracks: action.filteredTracks };
-            return state;
         }
         case "set-search-text": {
             return { ...state, searchText: action.searchText };

@@ -15,18 +15,18 @@ export const covidReducer = (
         case "start-watching": {
             return {
                 ...state,
-                watchingCovidEntityNames: [
-                    ...state.watchingCovidEntityNames,
-                    action.entityName
+                watchingCovidEntityUids: [
+                    ...state.watchingCovidEntityUids,
+                    action.covidEntityUid
                 ]
             };
         }
         case "stop-watching": {
             return {
                 ...state,
-                watchingCovidEntityNames: [
-                    ...state.watchingCovidEntityNames.filter(
-                        x => x !== action.entityName
+                watchingCovidEntityUids: [
+                    ...state.watchingCovidEntityUids.filter(
+                        x => x !== action.covidEntityUid
                     )
                 ]
             };

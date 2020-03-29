@@ -6,7 +6,6 @@ import {
     IonItemOptions,
     IonItemOption
 } from "@ionic/react";
-import { Time } from "../Time";
 import { CovidEntity } from "../../models/CovidEntity";
 
 interface CovidCardProps {
@@ -23,21 +22,19 @@ const CovidCard: React.FC<CovidCardProps> = ({
     covidEntity
 }) => {
     const stopWatching = () => {
-        onStopWatching(covidEntity.name);
+        onStopWatching(covidEntity._uid);
     };
 
     const startWatching = () => {
-        onStartWatching(covidEntity.name);
+        onStartWatching(covidEntity._uid);
     };
 
     return (
         <IonItemSliding class={"covid-card"}>
             <IonItem>
                 <IonLabel>
-                    <h3>{covidEntity.name}</h3>
-                    <p>
-                        <Time date={covidEntity.lastUpdated} /> &mdash;&nbsp;
-                    </p>
+                    <h3>{covidEntity.displayName}</h3>
+                    <p>Last Update: {covidEntity.updatedAt.toString()}</p>
                 </IonLabel>
             </IonItem>
             <IonItemOptions>

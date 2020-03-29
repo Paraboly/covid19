@@ -1,28 +1,55 @@
 import { Plugins } from "@capacitor/core";
 import { CovidEntity } from "../models/CovidEntity";
 import { Location } from "../models/Location";
+import { ApiService } from "../services/ApiService";
+import { RawCovidEntity } from "../models/RawCovidEntity";
 
 const { Storage } = Plugins;
 
 const locationsUrl = "/assets/data/locations.json";
-const testCovidDataUrl = "/assets/data/testCovidData.json";
+// const testCovidDataUrl = "/assets/data/testCovidData.json";
 
 const HAS_LOGGED_IN = "hasLoggedIn";
 const HAS_SEEN_TUTORIAL = "hasSeenTutorial";
 const USERNAME = "username";
 
+function processRawCovidData(rawCovidData: RawCovidEntity): CovidEntity {
+    return {
+        ...rawCovidData,
+        province: rawCovidData.province || "",
+        updatedAt: new Date(rawCovidData.updatedAt),
+        coordinates: {
+            latitude: Number.parseFloat(rawCovidData.coordinates.latitude),
+            longitude: Number.parseFloat(rawCovidData.coordinates.longitude)
+        },
+        isCountry: rawCovidData.province === null,
+        displayName:
+            rawCovidData.province === null
+                ? rawCovidData.country
+                : rawCovidData.province,
+        _uid:
+            rawCovidData.province === null
+                ? rawCovidData.country
+                : rawCovidData.country + rawCovidData.province
+    };
+}
+
 export const getConfData = async () => {
     const response = await Promise.all([
         fetch(locationsUrl),
-        fetch(testCovidDataUrl)
+        ApiService.getAllEntities()
     ]);
 
     const locations = (await response[0].json()) as Location[];
-    const testCovidData = (await response[1].json()) as CovidEntity[];
+    const rawCovidData = response[1];
+
+    const processedCovidData = rawCovidData.map(rawData =>
+        processRawCovidData(rawData)
+    );
 
     const data = {
         locations,
-        covidEntities: testCovidData
+        covidEntities: processedCovidData
     };
     return data;
 };

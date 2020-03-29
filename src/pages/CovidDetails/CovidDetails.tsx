@@ -23,8 +23,8 @@ import "./CovidDetails.scss";
 import * as selectors from "../../data/selectors";
 import { setSearchText } from "../../data/covid/covid.actions";
 import ShareSocialFab from "../../components/ShareSocialFab";
-import { SessionService } from "../../services/SessionService";
 import { CovidEntity } from "../../models/CovidEntity";
+import { ApiService } from "../../services/ApiService";
 
 interface OwnProps {}
 
@@ -58,7 +58,7 @@ const LatestNewsPage: React.FC<LatestNewsPageProps> = ({
     };
 
     const getCOVID19 = async () => {
-        const byCountry = await SessionService.getAllCountryStats();
+        const byCountry = await ApiService.getAllEntities();
         console.log(byCountry);
         return byCountry;
     };

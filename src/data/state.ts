@@ -5,7 +5,7 @@ import { userReducer } from "./user/user.reducer";
 export const initialState: AppState = {
     data: {
         covidEntities: [],
-        watchingCovidEntityNames: [],
+        watchingCovidEntityUids: [],
         locations: [],
         mapCenterId: 0,
         loading: false

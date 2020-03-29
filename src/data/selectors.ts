@@ -2,8 +2,8 @@ import { createSelector } from "reselect";
 import { AppState } from "./state";
 
 const getEntities = (state: AppState) => state.data.covidEntities;
-const getWatchingEntityNames = (state: AppState) =>
-    state.data.watchingCovidEntityNames;
+const getWatchingCovidEntityUids = (state: AppState) =>
+    state.data.watchingCovidEntityUids;
 const getSearchText = (state: AppState) => state.data.searchText;
 
 export const getFilteredEntities = createSelector(getEntities, x => x);
@@ -17,7 +17,9 @@ export const getSearchedEntities = createSelector(
         }
         return entities.filter(
             entity =>
-                entity.name.toLowerCase().indexOf(searchText.toLowerCase()) > -1
+                entity.displayName
+                    .toLowerCase()
+                    .indexOf(searchText.toLowerCase()) > -1
         );
     }
 );
@@ -26,9 +28,9 @@ export const getCovidEntities = createSelector(getSearchedEntities, x => x);
 
 export const getWatchingCovidEntities = createSelector(
     getSearchedEntities,
-    getWatchingEntityNames,
-    (entities, watchingEntityNames) =>
-        entities.filter(x => watchingEntityNames.indexOf(x.name) > -1)
+    getWatchingCovidEntityUids,
+    (entities, watchingCovidEntityUids) =>
+        entities.filter(x => watchingCovidEntityUids.indexOf(x._uid) > -1)
 );
 
 export const mapCenter = (state: AppState) => {

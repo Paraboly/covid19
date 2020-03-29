@@ -21,16 +21,16 @@ export const setData = (data: Partial<CovidState>) =>
         data
     } as const);
 
-export const startWatching = (entityName: string) =>
+export const startWatching = (covidEntityUid: string) =>
     ({
         type: "start-watching",
-        entityName
+        covidEntityUid
     } as const);
 
-export const stopWatching = (entityName: string) =>
+export const stopWatching = (covidEntityUid: string) =>
     ({
         type: "stop-watching",
-        entityName
+        covidEntityUid
     } as const);
 
 export const setSearchText = (searchText?: string) =>

@@ -16,12 +16,21 @@ const USERNAME = "username";
 function processRawCovidData(rawCovidData: RawCovidEntity): CovidEntity {
     return {
         ...rawCovidData,
+        province: rawCovidData.province || "",
         updatedAt: new Date(rawCovidData.updatedAt),
         coordinates: {
             latitude: Number.parseFloat(rawCovidData.coordinates.latitude),
             longitude: Number.parseFloat(rawCovidData.coordinates.longitude)
         },
-        isCountry: rawCovidData.province === null
+        isCountry: rawCovidData.province === null,
+        displayName:
+            rawCovidData.province === null
+                ? rawCovidData.country
+                : rawCovidData.province,
+        _uid:
+            rawCovidData.province === null
+                ? rawCovidData.country
+                : rawCovidData.country + rawCovidData.province
     };
 }
 

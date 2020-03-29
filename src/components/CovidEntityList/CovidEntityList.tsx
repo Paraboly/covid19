@@ -11,7 +11,7 @@ interface OwnProps {
 }
 
 interface StateProps {
-    watchingCovidEntityNames: string[];
+    watchingCovidEntityUids: string[];
 }
 
 interface DispatchProps {
@@ -25,7 +25,7 @@ const CovidEntityList: React.FC<CovidEntityListProps> = ({
     startWatching,
     stopWatching,
     covidEntities,
-    watchingCovidEntityNames,
+    watchingCovidEntityUids,
     hide
 }) => {
     if (covidEntities.length === 0 && !hide) {
@@ -43,7 +43,7 @@ const CovidEntityList: React.FC<CovidEntityListProps> = ({
                     <CovidCard
                         covidEntity={covidEntity}
                         isWatching={
-                            watchingCovidEntityNames.indexOf(covidEntity.name) >
+                            watchingCovidEntityUids.indexOf(covidEntity._uid) >
                             -1
                         }
                         onStartWatching={startWatching}
@@ -58,7 +58,7 @@ const CovidEntityList: React.FC<CovidEntityListProps> = ({
 
 export default connect({
     mapStateToProps: state => ({
-        watchingCovidEntityNames: state.data.watchingCovidEntityNames
+        watchingCovidEntityUids: state.data.watchingCovidEntityUids
     }),
     mapDispatchToProps: {
         startWatching,

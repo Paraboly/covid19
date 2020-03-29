@@ -45,12 +45,6 @@ function processRawLicenseAttribs(
             return { name, ...rawLicenseAttrib };
         })
         .values()
-        .map(a => {
-            return {
-                ...a,
-                repository: new URL(a.repository)
-            };
-        })
         .value();
 }
 
@@ -76,7 +70,7 @@ export const getCovidData = async () => {
 export const getStaticData = async () => {
     const response = await Promise.all([fetch(licenseAttribsUrl)]);
 
-    const rawLicenseAttribs = (await response[1].json()) as NameToRawLicenseAttributionDict;
+    const rawLicenseAttribs = (await response[0].json()) as NameToRawLicenseAttributionDict;
 
     const processedLicenseAttribs = processRawLicenseAttribs(rawLicenseAttribs);
 

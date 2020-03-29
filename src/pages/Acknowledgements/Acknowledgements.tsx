@@ -8,11 +8,23 @@ import {
     IonButtons,
     IonBackButton
 } from "@ionic/react";
+import { connect } from "../../data/connect";
+import * as selectors from "../../data/selectors";
 import "./Acknowledgements.scss";
+import { LicenseAttribution } from "../../models/LicenseAttribution/LicenseAttribution";
 
-interface InfoProps {}
+interface OwnProps {}
 
-const Info: React.FC<InfoProps> = () => {
+interface StateProps {
+    licenseAttributions: LicenseAttribution[];
+}
+
+interface DispatchProps {}
+
+type InfoProps = OwnProps & StateProps & DispatchProps;
+
+const Info: React.FC<InfoProps> = ({ licenseAttributions }) => {
+    console.log(licenseAttributions);
     return (
         <IonPage id="ackn-page">
             <IonHeader>
@@ -40,4 +52,9 @@ const Info: React.FC<InfoProps> = () => {
     );
 };
 
-export default Info;
+export default connect<OwnProps, StateProps, DispatchProps>({
+    mapStateToProps: state => ({
+        licenseAttributions: selectors.licenseAttributions(state)
+    }),
+    component: React.memo(Info)
+});

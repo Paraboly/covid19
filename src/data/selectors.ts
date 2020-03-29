@@ -69,6 +69,6 @@ export const mapCenter = (state: AppState) => {
     return item;
 };
 
-export const LisenceAttributions = (state: AppState) => {
+export const licenseAttributions = (state: AppState) => {
     return state.static.licenseAttributions;
 };

@@ -1,7 +1,7 @@
 export interface LicenseAttribution {
     name: string;
     licenses: string;
-    repository: URL;
+    repository: string;
     publisher: string;
     email: string;
 }

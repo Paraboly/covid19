@@ -63,6 +63,7 @@ const LatestNewsPage: React.FC<LatestNewsPageProps> = ({
 
     useEffect(() => {
         if (isWaitingForLoading && !isLoading) {
+            setIsWaitingForLoading(false);
             ionRefresherRef.current!.complete();
             setShowCompleteToast(true);
         }

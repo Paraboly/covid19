@@ -1,6 +1,7 @@
 {
-    "extends": ["tslint-react"],
+    "extends": ["tslint:recommended", "tslint-react"],
     "rules": {
-        "jsx-no-multiline-js": false
+        "jsx-no-multiline-js": { "severity": "warn" },
+        "no-console": { "severity": "warn" }
     }
 }

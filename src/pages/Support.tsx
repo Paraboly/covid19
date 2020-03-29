@@ -49,7 +49,7 @@ const Support: React.FC<SupportProps> = () => {
             <IonHeader>
                 <IonToolbar>
                     <IonButtons slot="start">
-                        <IonMenuButton/>
+                        <IonMenuButton />
                     </IonButtons>
                     <IonTitle>Support</IonTitle>
                 </IonToolbar>

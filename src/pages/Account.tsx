@@ -40,7 +40,7 @@ const Account: React.FC<AccountProps> = ({ setUsername, username }) => {
             <IonHeader>
                 <IonToolbar>
                     <IonButtons slot="start">
-                        <IonMenuButton/>
+                        <IonMenuButton />
                     </IonButtons>
                     <IonTitle>Account</IonTitle>
                 </IonToolbar>

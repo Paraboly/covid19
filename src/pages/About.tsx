@@ -38,12 +38,12 @@ const About: React.FC<AboutProps> = () => {
             <IonHeader>
                 <IonToolbar>
                     <IonButtons slot="start">
-                        <IonMenuButton/>
+                        <IonMenuButton />
                     </IonButtons>
                     <IonTitle>About</IonTitle>
                     <IonButtons slot="end">
                         <IonButton icon-only={true} onClick={presentPopover}>
-                            <IonIcon slot="icon-only" icon={more}/>
+                            <IonIcon slot="icon-only" icon={more} />
                         </IonButton>
                     </IonButtons>
                 </IonToolbar>
@@ -60,7 +60,7 @@ const About: React.FC<AboutProps> = () => {
 
                     <IonList lines="none">
                         <IonItem>
-                            <IonIcon icon={calendar} slot="start"/>
+                            <IonIcon icon={calendar} slot="start" />
                             <IonLabel position="stacked">Date</IonLabel>
                             <IonDatetime
                                 displayFormat="MMM DD, YYYY"
@@ -70,10 +70,13 @@ const About: React.FC<AboutProps> = () => {
                         </IonItem>
 
                         <IonItem>
-                            <IonIcon icon={pin} slot="start"/>
+                            <IonIcon icon={pin} slot="start" />
                             <IonLabel position="stacked">Location</IonLabel>
                             <IonSelect>
-                                <IonSelectOption value="madison" selected={true}>
+                                <IonSelectOption
+                                    value="madison"
+                                    selected={true}
+                                >
                                     Madison, WI
                                 </IonSelectOption>
                                 <IonSelectOption value="austin">

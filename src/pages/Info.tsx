@@ -69,7 +69,7 @@ const Info: React.FC<InfoProps> = () => {
                 <div className="info-info">
                     <IonList lines="full">
                         <IonItem
-                            button
+                            button={true}
                             href={
                                 "https://www.who.int/emergencies/diseases/novel-coronavirus-2019"
                             }
@@ -80,45 +80,45 @@ const Info: React.FC<InfoProps> = () => {
                                 slot="start"
                             />
                             <IonInput
-                                readonly
+                                readonly={true}
                                 style={{ pointerEvents: "none" }}
                             >
                                 World Health Organization
                             </IonInput>
                         </IonItem>
                         <IonItem
-                            button
+                            button={true}
                             routerLink={"/tabs/info/acknowledgements"}
                         >
                             <IonIcon icon={heartEmpty} slot="start" />
                             <IonInput
-                                readonly
+                                readonly={true}
                                 style={{ pointerEvents: "none" }}
                             >
                                 Acknowledgements
                             </IonInput>
                         </IonItem>
                         <IonItem
-                            button
+                            button={true}
                             href={"https://github.com/novelcovid/api"}
                             target={"_blank"}
                         >
                             <IonIcon icon={cloudOutline} slot="start" />
                             <IonInput
-                                readonly
+                                readonly={true}
                                 style={{ pointerEvents: "none" }}
                             >
                                 Data Source
                             </IonInput>
                         </IonItem>
                         <IonItem
-                            button
+                            button={true}
                             href={"https://github.com/paraboly/covid19"}
                             target={"_blank"}
                         >
                             <IonIcon icon={logoGithub} slot="start" />
                             <IonInput
-                                readonly
+                                readonly={true}
                                 style={{ pointerEvents: "none" }}
                             >
                                 Github Repository

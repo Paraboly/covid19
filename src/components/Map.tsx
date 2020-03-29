@@ -29,11 +29,11 @@ const Map: React.FC<MapProps> = ({ mapCenter, locations }) => {
 
         function addMarkers() {
             locations.forEach(markerData => {
-                let infoWindow = new google.maps.InfoWindow({
+                const infoWindow = new google.maps.InfoWindow({
                     content: `<h5>${markerData.name}</h5>`
                 });
 
-                let marker = new google.maps.Marker({
+                const marker = new google.maps.Marker({
                     position: new google.maps.LatLng(
                         markerData.lat,
                         markerData.lng

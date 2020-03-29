@@ -15,12 +15,18 @@ export const getSearchedEntities = createSelector(
         if (!searchText) {
             return entities;
         }
-        return entities.filter(
-            entity =>
-                entity.displayName
-                    .toLowerCase()
-                    .indexOf(searchText.toLowerCase()) > -1
-        );
+        return entities.filter(entity => {
+            const countryNameMatches =
+                entity.country.toLowerCase().indexOf(searchText.toLowerCase()) >
+                -1;
+
+            return entity.isCountry
+                ? countryNameMatches
+                : countryNameMatches ||
+                      entity.province
+                          .toLowerCase()
+                          .indexOf(searchText.toLowerCase()) > -1;
+        });
     }
 );
 

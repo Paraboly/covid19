@@ -34,7 +34,36 @@ const CovidCard: React.FC<CovidCardProps> = ({
             <IonItem>
                 <IonLabel>
                     <h3>{covidEntity.displayName}</h3>
-                    <p>Last Update: {covidEntity.updatedAt.toString()}</p>
+                    <p
+                        style={{
+                            display: "grid",
+                            gridTemplateColumns: "1fr 1fr 1fr",
+                            justifyContent: "space-between"
+                        }}
+                    >
+                        <span
+                            style={{
+                                color: "black"
+                            }}
+                        >
+                            {covidEntity.stats.confirmed}
+                        </span>
+                        <span
+                            style={{
+                                color: "red"
+                            }}
+                        >
+                            {covidEntity.stats.deaths}
+                        </span>
+                        <span
+                            style={{
+                                color: "blue"
+                            }}
+                        >
+                            {covidEntity.stats.recovered}
+                        </span>
+                    </p>
+                    <p>Updated: {covidEntity.updatedAt.toString()}</p>
                 </IonLabel>
             </IonItem>
             <IonItemOptions>

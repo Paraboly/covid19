@@ -3,11 +3,11 @@ import { AppState } from "./state";
 import _ from "lodash";
 import { CountryToCovidEntitiesDict } from "../models/CountryToCovidEntitiesDict";
 
-const getEntities = (state: AppState) => state.data.covidEntities;
+const getEntities = (state: AppState) => state.covid.covidEntities;
 const getWatchingCovidEntityUids = (state: AppState) =>
-    state.data.watchingCovidEntityUids;
-const getSearchText = (state: AppState) => state.data.searchText;
-export const getIsLoading = (state: AppState) => state.data.loading || false;
+    state.covid.watchingCovidEntityUids;
+const getSearchText = (state: AppState) => state.covid.searchText;
+export const getIsLoading = (state: AppState) => state.covid.loading || false;
 
 export const getFilteredEntities = createSelector(getEntities, x => x);
 
@@ -55,8 +55,8 @@ export const getWatchingCovidEntitiesGroupedByCountry = createSelector(
 );
 
 export const mapCenter = (state: AppState) => {
-    const item = state.data.locations.find(
-        l => l.id === state.data.mapCenterId
+    const item = state.covid.locations.find(
+        l => l.id === state.covid.mapCenterId
     );
     if (item == null) {
         return {
@@ -67,4 +67,8 @@ export const mapCenter = (state: AppState) => {
         };
     }
     return item;
+};
+
+export const LisenceAttributions = (state: AppState) => {
+    return state.static.licenseAttributions;
 };

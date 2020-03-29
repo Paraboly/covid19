@@ -3,11 +3,14 @@ import { CovidEntity } from "../models/CovidEntity";
 import { Location } from "../models/Location";
 import { ApiService } from "../services/ApiService";
 import { RawCovidEntity } from "../models/RawCovidEntity";
+import { NameToRawLicenseAttributionDict } from "../models/LicenseAttribution/NameToRawLicenseAttributionDict";
+import _ from "lodash";
+import { LicenseAttribution } from "../models/LicenseAttribution/LicenseAttribution";
 
 const { Storage } = Plugins;
 
 const locationsUrl = "/assets/data/locations.json";
-// const testCovidDataUrl = "/assets/data/testCovidData.json";
+const licenseAttribsUrl = "/assets/generated/licenseAttribs.json";
 
 const HAS_LOGGED_IN = "hasLoggedIn";
 const HAS_SEEN_TUTORIAL = "hasSeenTutorial";
@@ -34,6 +37,23 @@ function processRawCovidData(rawCovidData: RawCovidEntity): CovidEntity {
     };
 }
 
+function processRawLicenseAttribs(
+    rawLicenseAttribDict: NameToRawLicenseAttributionDict
+): LicenseAttribution[] {
+    return _.chain(rawLicenseAttribDict)
+        .mapValues((rawLicenseAttrib, name) => {
+            return { name, ...rawLicenseAttrib };
+        })
+        .values()
+        .map(a => {
+            return {
+                ...a,
+                repository: new URL(a.repository)
+            };
+        })
+        .value();
+}
+
 export const getCovidData = async () => {
     const response = await Promise.all([
         fetch(locationsUrl),
@@ -47,11 +67,22 @@ export const getCovidData = async () => {
         processRawCovidData(rawData)
     );
 
-    const data = {
+    return {
         locations,
         covidEntities: processedCovidData
     };
-    return data;
+};
+
+export const getStaticData = async () => {
+    const response = await Promise.all([fetch(licenseAttribsUrl)]);
+
+    const rawLicenseAttribs = (await response[1].json()) as NameToRawLicenseAttributionDict;
+
+    const processedLicenseAttribs = processRawLicenseAttribs(rawLicenseAttribs);
+
+    return {
+        licenseAttributions: processedLicenseAttribs
+    };
 };
 
 export const getUserData = async () => {

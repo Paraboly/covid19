@@ -103,7 +103,7 @@ export default App;
 const IonicAppConnected = connect<{}, StateProps, DispatchProps>({
     mapStateToProps: state => ({
         darkMode: state.user.darkMode,
-        covidEntities: state.data.covidEntities
+        covidEntities: state.covid.covidEntities
     }),
     mapDispatchToProps: {
         loadCovidData,

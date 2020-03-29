@@ -41,7 +41,7 @@
         "eject": "react-scripts eject",
         "prettier": "prettier --write --config .prettierrc **/src/**/*.ts **/src/**/*.tsx **/src/**/*.css **/src/**/*.scss",
         "tslint": "tslint --fix --config tslint.json ./src/**/*.ts ./src/**/*.tsx",
-        "license-crawl": "license-checker --json --out ./public/assets/generated/license.json",
+        "license-crawl": "license-checker --json --out ./public/assets/generated/licenseAttribs.json",
         "license-crawl-summary": "license-checker --summary"
     },
     "eslintConfig": {

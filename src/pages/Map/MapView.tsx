@@ -110,7 +110,7 @@ const startMap = (pwcMap: HTMLElement) => {
 
 export default connect<OwnProps, StateProps, DispatchProps>({
     mapStateToProps: state => ({
-        locations: state.data.locations,
+        locations: state.covid.locations,
         mapCenter: selectors.mapCenter(state)
     }),
     component: MapView

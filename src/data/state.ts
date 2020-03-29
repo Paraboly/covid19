@@ -1,9 +1,10 @@
 import { combineReducers } from "./combineReducers";
 import { covidReducer } from "./covid/covid.reducer";
 import { userReducer } from "./user/user.reducer";
+import { staticReducer } from "./static/static.reducer";
 
 export const initialState: AppState = {
-    data: {
+    covid: {
         covidEntities: [],
         watchingCovidEntityUids: [],
         locations: [],
@@ -15,12 +16,17 @@ export const initialState: AppState = {
         darkMode: false,
         isLoggedin: false,
         loading: false
+    },
+    static: {
+        licenseAttributions: [],
+        loading: false
     }
 };
 
 export const reducers = combineReducers({
-    data: covidReducer,
-    user: userReducer
+    covid: covidReducer,
+    user: userReducer,
+    static: staticReducer
 });
 
 export type AppState = ReturnType<typeof reducers>;

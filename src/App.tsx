@@ -26,7 +26,7 @@ import "./theme/variables.css";
 import MainTabs from "./pages/MainTabs";
 import { connect } from "./data/connect";
 import { AppContextProvider } from "./data/AppContext";
-import { loadConfData } from "./data/covid/covid.actions";
+import { loadCovidData } from "./data/covid/covid.actions";
 import {
     setIsLoggedIn,
     setUsername,
@@ -50,7 +50,7 @@ interface StateProps {
 }
 
 interface DispatchProps {
-    loadConfData: typeof loadConfData;
+    loadCovidData: typeof loadCovidData;
     loadUserData: typeof loadUserData;
     setIsLoggedIn: typeof setIsLoggedIn;
     setUsername: typeof setUsername;
@@ -63,12 +63,12 @@ const IonicApp: React.FC<IonicAppProps> = ({
     covidEntities,
     setIsLoggedIn,
     setUsername,
-    loadConfData,
+    loadCovidData,
     loadUserData
 }) => {
     useEffect(() => {
         loadUserData();
-        loadConfData();
+        loadCovidData();
         // eslint-disable-next-line
     }, []);
 
@@ -106,7 +106,7 @@ const IonicAppConnected = connect<{}, StateProps, DispatchProps>({
         covidEntities: state.data.covidEntities
     }),
     mapDispatchToProps: {
-        loadConfData,
+        loadCovidData,
         loadUserData,
         setIsLoggedIn,
         setUsername

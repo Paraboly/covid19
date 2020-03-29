@@ -34,7 +34,7 @@ function processRawCovidData(rawCovidData: RawCovidEntity): CovidEntity {
     };
 }
 
-export const getConfData = async () => {
+export const getCovidData = async () => {
     const response = await Promise.all([
         fetch(locationsUrl),
         ApiService.getAllEntities()

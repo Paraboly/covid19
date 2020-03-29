@@ -1,23 +1,23 @@
-import { getConfData } from "../dataApi";
+import { getCovidData } from "../dataApi";
 import { ActionType } from "../../util/types";
 import { CovidState } from "./covid.state";
 
-export const loadConfData = () => async (dispatch: React.Dispatch<any>) => {
+export const loadCovidData = () => async (dispatch: React.Dispatch<any>) => {
     dispatch(setLoading(true));
-    const data = await getConfData();
+    const data = await getCovidData();
     dispatch(setData(data));
     dispatch(setLoading(false));
 };
 
 export const setLoading = (isLoading: boolean) =>
     ({
-        type: "set-conf-loading",
+        type: "set-covid-loading",
         isLoading
     } as const);
 
 export const setData = (data: Partial<CovidState>) =>
     ({
-        type: "set-conf-data",
+        type: "set-covid-data",
         data
     } as const);
 

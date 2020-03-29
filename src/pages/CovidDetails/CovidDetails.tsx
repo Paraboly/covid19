@@ -21,10 +21,9 @@ import { options } from "ionicons/icons";
 import CovidEntityList from "../../components/CovidEntityList/CovidEntityList";
 import "./CovidDetails.scss";
 import * as selectors from "../../data/selectors";
-import { setSearchText, loadConfData } from "../../data/covid/covid.actions";
+import { setSearchText, loadCovidData } from "../../data/covid/covid.actions";
 import ShareSocialFab from "../../components/ShareSocialFab";
 import { CovidEntity } from "../../models/CovidEntity";
-import { ApiService } from "../../services/ApiService";
 
 interface OwnProps {}
 
@@ -37,7 +36,7 @@ interface StateProps {
 
 interface DispatchProps {
     setSearchText: typeof setSearchText;
-    loadConfData: typeof loadConfData;
+    loadCovidData: typeof loadCovidData;
 }
 
 type LatestNewsPageProps = OwnProps & StateProps & DispatchProps;
@@ -48,7 +47,7 @@ const LatestNewsPage: React.FC<LatestNewsPageProps> = ({
     mode,
     isLoading,
     setSearchText,
-    loadConfData
+    loadCovidData
 }) => {
     const [segment, setSegment] = useState<"all" | "favorites">("all");
     const [, setShowFilterModal] = useState(false);
@@ -58,7 +57,7 @@ const LatestNewsPage: React.FC<LatestNewsPageProps> = ({
 
     const doRefresh = async () => {
         setIsWaitingForLoading(true);
-        loadConfData();
+        loadCovidData();
     };
 
     useEffect(() => {
@@ -155,7 +154,7 @@ export default connect<OwnProps, StateProps, DispatchProps>({
     }),
     mapDispatchToProps: {
         setSearchText,
-        loadConfData
+        loadCovidData
     },
     component: React.memo(LatestNewsPage)
 });

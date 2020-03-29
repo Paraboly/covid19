@@ -6,10 +6,10 @@ export const covidReducer = (
     action: CovidActions
 ): CovidState => {
     switch (action.type) {
-        case "set-conf-loading": {
+        case "set-covid-loading": {
             return { ...state, loading: action.isLoading };
         }
-        case "set-conf-data": {
+        case "set-covid-data": {
             return { ...state, ...action.data };
         }
         case "start-watching": {

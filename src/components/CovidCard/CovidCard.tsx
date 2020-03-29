@@ -31,7 +31,7 @@ const CovidCard: React.FC<CovidCardProps> = ({
 
     return (
         <IonItemSliding class={"covid-card"}>
-            <IonItem>
+            <IonItem lines={"inset"}>
                 <IonLabel>
                     <h3>{covidEntity.displayName}</h3>
                     <p

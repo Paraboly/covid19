@@ -23,13 +23,13 @@ import "./CovidDetails.scss";
 import * as selectors from "../../data/selectors";
 import { setSearchText, loadCovidData } from "../../data/covid/covid.actions";
 import ShareSocialFab from "../../components/ShareSocialFab";
-import { CovidEntity } from "../../models/CovidEntity";
+import { CountryToCovidEntitiesDict } from "../../models/CountryToCovidEntitiesDict";
 
 interface OwnProps {}
 
 interface StateProps {
-    covidEntities: CovidEntity[];
-    watchingCovidEntities: CovidEntity[];
+    covidEntitiesGroupedByCountry: CountryToCovidEntitiesDict;
+    watchingCovidEntitiesGroupedByCountry: CountryToCovidEntitiesDict;
     mode: "ios" | "md";
     isLoading: boolean;
 }
@@ -42,8 +42,8 @@ interface DispatchProps {
 type LatestNewsPageProps = OwnProps & StateProps & DispatchProps;
 
 const LatestNewsPage: React.FC<LatestNewsPageProps> = ({
-    covidEntities,
-    watchingCovidEntities,
+    covidEntitiesGroupedByCountry,
+    watchingCovidEntitiesGroupedByCountry,
     mode,
     isLoading,
     setSearchText,
@@ -130,12 +130,12 @@ const LatestNewsPage: React.FC<LatestNewsPageProps> = ({
                 />
 
                 <CovidEntityList
-                    covidEntities={covidEntities}
+                    covidEntityGroups={covidEntitiesGroupedByCountry}
                     listType={segment}
                     hide={segment === "favorites"}
                 />
                 <CovidEntityList
-                    covidEntities={watchingCovidEntities}
+                    covidEntityGroups={watchingCovidEntitiesGroupedByCountry}
                     listType={segment}
                     hide={segment === "all"}
                 />
@@ -147,8 +147,12 @@ const LatestNewsPage: React.FC<LatestNewsPageProps> = ({
 
 export default connect<OwnProps, StateProps, DispatchProps>({
     mapStateToProps: state => ({
-        covidEntities: selectors.getCovidEntities(state),
-        watchingCovidEntities: selectors.getWatchingCovidEntities(state),
+        covidEntitiesGroupedByCountry: selectors.getCovidEntititesGroupedByCountry(
+            state
+        ),
+        watchingCovidEntitiesGroupedByCountry: selectors.getWatchingCovidEntitiesGroupedByCountry(
+            state
+        ),
         mode: getConfig()!.get("mode"),
         isLoading: selectors.getIsLoading(state)
     }),

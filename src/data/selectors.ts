@@ -1,5 +1,7 @@
 import { createSelector } from "reselect";
 import { AppState } from "./state";
+import _ from "lodash";
+import { CountryToCovidEntitiesDict } from "../models/CountryToCovidEntitiesDict";
 
 const getEntities = (state: AppState) => state.data.covidEntities;
 const getWatchingCovidEntityUids = (state: AppState) =>
@@ -38,6 +40,18 @@ export const getWatchingCovidEntities = createSelector(
     getWatchingCovidEntityUids,
     (entities, watchingCovidEntityUids) =>
         entities.filter(x => watchingCovidEntityUids.indexOf(x._uid) > -1)
+);
+
+export const getCovidEntititesGroupedByCountry = createSelector(
+    getCovidEntities,
+    entities =>
+        _.groupBy(entities, e => e.country) as CountryToCovidEntitiesDict
+);
+
+export const getWatchingCovidEntitiesGroupedByCountry = createSelector(
+    getWatchingCovidEntities,
+    entities =>
+        _.groupBy(entities, e => e.country) as CountryToCovidEntitiesDict
 );
 
 export const mapCenter = (state: AppState) => {

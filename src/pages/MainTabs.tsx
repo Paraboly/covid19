@@ -12,6 +12,7 @@ import { map, informationCircle, listBox } from "ionicons/icons";
 import CovidDetails from "./CovidDetails/CovidDetails";
 import MapView from "./Map/MapView";
 import Info from "./Info";
+import Acknowledgements from "./Acknowledgements/Acknowledgements";
 
 interface MainTabsProps {}
 
@@ -35,6 +36,10 @@ const MainTabs: React.FC<MainTabsProps> = () => {
                     exact={true}
                 />
                 <Route path="/tabs/info" render={() => <Info />} exact={true} />
+                <Route
+                    path="/tabs/info/acknowledgements"
+                    component={Acknowledgements}
+                />
             </IonRouterOutlet>
             <IonTabBar slot="bottom">
                 <IonTabButton tab="map" href="/tabs/map">

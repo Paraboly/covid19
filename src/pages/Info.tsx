@@ -9,18 +9,21 @@ import {
     IonMenuButton,
     IonButton,
     IonIcon,
-    IonDatetime,
-    IonSelectOption,
     IonList,
     IonItem,
-    IonLabel,
-    IonSelect,
     IonPopover,
-    IonText,
     IonInput
 } from "@ionic/react";
 import "./Info.scss";
-import { calendar, pin, more, informationCircleOutline } from "ionicons/icons";
+import {
+    more,
+    informationCircleOutline,
+    heartEmpty,
+    logoGithub,
+    cloudDownload,
+    cloud,
+    cloudOutline
+} from "ionicons/icons";
 import AboutPopover from "../components/AboutPopover";
 
 interface InfoProps {}
@@ -50,16 +53,24 @@ const Info: React.FC<InfoProps> = () => {
                 </IonToolbar>
             </IonHeader>
             <IonContent>
-                {/* <div className="info-header">
-                    <img
-                        src="assets/img/ionic-logo-white.svg"
-                        alt="ionic logo"
-                    />
-                </div> */}
+                <div className="info-header">
+                    <h4 className="ion-padding-start ion-padding-bottom">
+                        Stay home, stay safe.
+                    </h4>
+                    <span
+                        role="img"
+                        aria-label="heart"
+                        style={{
+                            fontSize: "50px"
+                        }}
+                    >
+                        ❤️
+                    </span>
+                </div>
                 <div className="info-info">
-                    <h4 className="ion-padding-bottom">Stay home, stay safe</h4>
                     <IonList lines="none">
                         <IonItem
+                            button
                             href={
                                 "https://www.who.int/emergencies/diseases/novel-coronavirus-2019"
                             }
@@ -69,7 +80,6 @@ const Info: React.FC<InfoProps> = () => {
                                 icon={informationCircleOutline}
                                 slot="start"
                             />
-                            <IonLabel position="stacked">Learn More</IonLabel>
                             <IonInput
                                 readonly
                                 style={{ pointerEvents: "none" }}
@@ -77,18 +87,45 @@ const Info: React.FC<InfoProps> = () => {
                                 World Health Organization
                             </IonInput>
                         </IonItem>
+                        <IonItem
+                            button
+                            routerLink={"/tabs/info/acknowledgements"}
+                        >
+                            <IonIcon icon={heartEmpty} slot="start" />
+                            <IonInput
+                                readonly
+                                style={{ pointerEvents: "none" }}
+                            >
+                                Acknowledgements
+                            </IonInput>
+                        </IonItem>
+                        <IonItem
+                            button
+                            href={"https://github.com/novelcovid/api"}
+                            target={"_blank"}
+                        >
+                            <IonIcon icon={cloudOutline} slot="start" />
+                            <IonInput
+                                readonly
+                                style={{ pointerEvents: "none" }}
+                            >
+                                Data Source
+                            </IonInput>
+                        </IonItem>
+                        <IonItem
+                            button
+                            href={"https://github.com/paraboly/covid19"}
+                            target={"_blank"}
+                        >
+                            <IonIcon icon={logoGithub} slot="start" />
+                            <IonInput
+                                readonly
+                                style={{ pointerEvents: "none" }}
+                            >
+                                Github Repository
+                            </IonInput>
+                        </IonItem>
                     </IonList>
-
-                    <p className="ion-padding-start ion-padding-end">
-                        The Ionic Conference is a one-day conference featuring
-                        talks from the Ionic team. It is focused on Ionic
-                        applications being built with Ionic 2. This includes
-                        migrating apps from Ionic 1 to Ionic 2, Angular
-                        concepts, Webpack, Sass, and many other technologies
-                        used in Ionic 2. Tickets are completely sold out, and
-                        we’re expecting more than 1000 developers – making this
-                        the largest Ionic conference ever!
-                    </p>
                 </div>
             </IonContent>
             <IonPopover

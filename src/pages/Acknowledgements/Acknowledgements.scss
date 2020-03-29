@@ -1,25 +1,26 @@
-#info-page {
-    .info-header {
+#ackn-page {
+    .ackn-header {
+        background-color: #222;
         padding: 16px;
         width: 100%;
         height: 30%;
         text-align: center;
     }
 
-    .info-header img {
+    .ackn-header img {
         max-height: 100%;
     }
 
-    .info-info p {
+    .ackn-info p {
         color: var(--ion-color-dark);
         text-align: left;
     }
 
-    .info-info ion-icon {
+    .ackn-info ion-icon {
         margin-inline-end: 32px;
     }
 
-    .ios .info-info {
+    .ios .ackn-info {
         text-align: center;
     }
 }

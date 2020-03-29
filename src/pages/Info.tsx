@@ -20,8 +20,6 @@ import {
     informationCircleOutline,
     heartEmpty,
     logoGithub,
-    cloudDownload,
-    cloud,
     cloudOutline
 } from "ionicons/icons";
 import AboutPopover from "../components/AboutPopover";
@@ -61,14 +59,15 @@ const Info: React.FC<InfoProps> = () => {
                         role="img"
                         aria-label="heart"
                         style={{
-                            fontSize: "50px"
+                            fontSize: "50px",
+                            display: "block"
                         }}
                     >
                         ❤️
                     </span>
                 </div>
                 <div className="info-info">
-                    <IonList lines="none">
+                    <IonList lines="full">
                         <IonItem
                             button
                             href={

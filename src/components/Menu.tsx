@@ -12,17 +12,7 @@ import {
     IonToolbar,
     IonToggle
 } from "@ionic/react";
-import {
-    listBox,
-    hammer,
-    help,
-    informationCircle,
-    logIn,
-    logOut,
-    map,
-    person,
-    personAdd
-} from "ionicons/icons";
+import { listBox, hammer, informationCircle, map } from "ionicons/icons";
 import React, { useState } from "react";
 import { connect } from "../data/connect";
 import { RouteComponentProps, withRouter } from "react-router";
@@ -32,17 +22,7 @@ const routes = {
     appPages: [
         { title: "Map", path: "/tabs/map", icon: map },
         { title: "List", path: "/tabs/covidDetails", icon: listBox },
-        { title: "About", path: "/tabs/about", icon: informationCircle }
-    ],
-    loggedInPages: [
-        { title: "Account", path: "/account", icon: person },
-        { title: "Support", path: "/support", icon: help },
-        { title: "Logout", path: "/logout", icon: logOut }
-    ],
-    loggedOutPages: [
-        { title: "Login", path: "/login", icon: logIn },
-        { title: "Support", path: "/support", icon: help },
-        { title: "Signup", path: "/signup", icon: personAdd }
+        { title: "Info", path: "/tabs/info", icon: informationCircle }
     ]
 };
 
@@ -63,12 +43,7 @@ interface DispatchProps {
 
 interface MenuProps extends RouteComponentProps, StateProps, DispatchProps {}
 
-const Menu: React.FC<MenuProps> = ({
-    darkMode,
-    history,
-    isAuthenticated,
-    setDarkMode
-}) => {
+const Menu: React.FC<MenuProps> = ({ darkMode, history, setDarkMode }) => {
     const [disableMenu, setDisableMenu] = useState(false);
 
     function renderlistItems(list: Pages[]) {

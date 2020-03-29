@@ -1,0 +1,25 @@
+#info-page {
+    .info-header {
+        padding: 16px;
+        width: 100%;
+        min-height: 30%;
+        text-align: center;
+    }
+
+    .info-header img {
+        max-height: 100%;
+    }
+
+    .info-info p {
+        color: var(--ion-color-dark);
+        text-align: left;
+    }
+
+    .info-info ion-icon {
+        margin-inline-end: 32px;
+    }
+
+    .ios .info-info {
+        text-align: center;
+    }
+}

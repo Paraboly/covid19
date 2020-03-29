@@ -35,6 +35,7 @@ import {
 import Tutorial from "./pages/Tutorial";
 import HomeOrTutorial from "./components/HomeOrTutorial";
 import { CovidEntity } from "./models/CovidEntity";
+import { loadStaticData } from "./data/static/static.actions";
 
 const App: React.FC = () => {
     return (
@@ -52,6 +53,7 @@ interface StateProps {
 interface DispatchProps {
     loadCovidData: typeof loadCovidData;
     loadUserData: typeof loadUserData;
+    loadStaticData: typeof loadStaticData;
     setIsLoggedIn: typeof setIsLoggedIn;
     setUsername: typeof setUsername;
 }
@@ -64,9 +66,11 @@ const IonicApp: React.FC<IonicAppProps> = ({
     setIsLoggedIn,
     setUsername,
     loadCovidData,
-    loadUserData
+    loadUserData,
+    loadStaticData
 }) => {
     useEffect(() => {
+        loadStaticData();
         loadUserData();
         loadCovidData();
         // eslint-disable-next-line
@@ -103,11 +107,12 @@ export default App;
 const IonicAppConnected = connect<{}, StateProps, DispatchProps>({
     mapStateToProps: state => ({
         darkMode: state.user.darkMode,
-        covidEntities: state.data.covidEntities
+        covidEntities: state.covid.covidEntities
     }),
     mapDispatchToProps: {
         loadCovidData,
         loadUserData,
+        loadStaticData,
         setIsLoggedIn,
         setUsername
     },

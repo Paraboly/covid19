@@ -1,5 +1,5 @@
-#about-page {
-    .about-header {
+#ackn-page {
+    .ackn-header {
         background-color: #222;
         padding: 16px;
         width: 100%;
@@ -7,20 +7,20 @@
         text-align: center;
     }
 
-    .about-header img {
+    .ackn-header img {
         max-height: 100%;
     }
 
-    .about-info p {
+    .ackn-info p {
         color: var(--ion-color-dark);
         text-align: left;
     }
 
-    .about-info ion-icon {
+    .ackn-info ion-icon {
         margin-inline-end: 32px;
     }
 
-    .ios .about-info {
+    .ios .ackn-info {
         text-align: center;
     }
 }

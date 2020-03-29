@@ -11,7 +11,8 @@ import { Route, Redirect } from "react-router";
 import { map, informationCircle, listBox } from "ionicons/icons";
 import CovidDetails from "./CovidDetails/CovidDetails";
 import MapView from "./Map/MapView";
-import About from "./About";
+import Info from "./Info";
+import Acknowledgements from "./Acknowledgements/Acknowledgements";
 
 interface MainTabsProps {}
 
@@ -34,10 +35,10 @@ const MainTabs: React.FC<MainTabsProps> = () => {
                     render={() => <MapView />}
                     exact={true}
                 />
+                <Route path="/tabs/info" render={() => <Info />} exact={true} />
                 <Route
-                    path="/tabs/about"
-                    render={() => <About />}
-                    exact={true}
+                    path="/tabs/info/acknowledgements"
+                    component={Acknowledgements}
                 />
             </IonRouterOutlet>
             <IonTabBar slot="bottom">
@@ -49,9 +50,9 @@ const MainTabs: React.FC<MainTabsProps> = () => {
                     <IonIcon icon={listBox} />
                     <IonLabel>List</IonLabel>
                 </IonTabButton>
-                <IonTabButton tab="about" href="/tabs/about">
+                <IonTabButton tab="info" href="/tabs/info">
                     <IonIcon icon={informationCircle} />
-                    <IonLabel>About</IonLabel>
+                    <IonLabel>Info</IonLabel>
                 </IonTabButton>
             </IonTabBar>
         </IonTabs>

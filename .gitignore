@@ -1,3 +1,9 @@
+### Project Specific
+# Generated assets
+public/assets/generated/
+
+
+### Generic
 # Logs
 .firebase
 logs

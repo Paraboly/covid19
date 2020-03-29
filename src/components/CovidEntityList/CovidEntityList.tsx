@@ -82,7 +82,7 @@ const CovidEntityList: React.FC<CovidEntityListProps> = ({
 
 export default connect({
     mapStateToProps: state => ({
-        watchingCovidEntityUids: state.data.watchingCovidEntityUids
+        watchingCovidEntityUids: state.covid.watchingCovidEntityUids
     }),
     mapDispatchToProps: {
         startWatching,

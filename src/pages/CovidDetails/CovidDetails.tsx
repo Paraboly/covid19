@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import {
     IonToolbar,
     IonContent,
@@ -21,7 +21,7 @@ import { options } from "ionicons/icons";
 import CovidEntityList from "../../components/CovidEntityList/CovidEntityList";
 import "./CovidDetails.scss";
 import * as selectors from "../../data/selectors";
-import { setSearchText } from "../../data/covid/covid.actions";
+import { setSearchText, loadConfData } from "../../data/covid/covid.actions";
 import ShareSocialFab from "../../components/ShareSocialFab";
 import { CovidEntity } from "../../models/CovidEntity";
 import { ApiService } from "../../services/ApiService";
@@ -32,36 +32,41 @@ interface StateProps {
     covidEntities: CovidEntity[];
     watchingCovidEntities: CovidEntity[];
     mode: "ios" | "md";
+    isLoading: boolean;
 }
 
 interface DispatchProps {
     setSearchText: typeof setSearchText;
+    loadConfData: typeof loadConfData;
 }
 
 type LatestNewsPageProps = OwnProps & StateProps & DispatchProps;
 
 const LatestNewsPage: React.FC<LatestNewsPageProps> = ({
-    watchingCovidEntities,
     covidEntities,
+    watchingCovidEntities,
+    mode,
+    isLoading,
     setSearchText,
-    mode
+    loadConfData
 }) => {
     const [segment, setSegment] = useState<"all" | "favorites">("all");
     const [, setShowFilterModal] = useState(false);
     const ionRefresherRef = useRef<HTMLIonRefresherElement>(null);
     const [showCompleteToast, setShowCompleteToast] = useState(false);
+    const [isWaitingForLoading, setIsWaitingForLoading] = useState(false);
 
     const doRefresh = async () => {
-        await getCOVID19();
-        ionRefresherRef.current!.complete();
-        setShowCompleteToast(true);
+        setIsWaitingForLoading(true);
+        loadConfData();
     };
 
-    const getCOVID19 = async () => {
-        const byCountry = await ApiService.getAllEntities();
-        console.log(byCountry);
-        return byCountry;
-    };
+    useEffect(() => {
+        if (isWaitingForLoading && !isLoading) {
+            ionRefresherRef.current!.complete();
+            setShowCompleteToast(true);
+        }
+    }, [isLoading]);
 
     return (
         <IonPage id="covidDetails-page">
@@ -144,10 +149,12 @@ export default connect<OwnProps, StateProps, DispatchProps>({
     mapStateToProps: state => ({
         covidEntities: selectors.getCovidEntities(state),
         watchingCovidEntities: selectors.getWatchingCovidEntities(state),
-        mode: getConfig()!.get("mode")
+        mode: getConfig()!.get("mode"),
+        isLoading: selectors.getIsLoading(state)
     }),
     mapDispatchToProps: {
-        setSearchText
+        setSearchText,
+        loadConfData
     },
     component: React.memo(LatestNewsPage)
 });

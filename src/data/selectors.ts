@@ -5,6 +5,7 @@ const getEntities = (state: AppState) => state.data.covidEntities;
 const getWatchingCovidEntityUids = (state: AppState) =>
     state.data.watchingCovidEntityUids;
 const getSearchText = (state: AppState) => state.data.searchText;
+export const getIsLoading = (state: AppState) => state.data.loading || false;
 
 export const getFilteredEntities = createSelector(getEntities, x => x);
 

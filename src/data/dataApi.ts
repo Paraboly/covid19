@@ -26,7 +26,7 @@ function processRawCovidData(rawCovidData: RawCovidEntity): CovidEntity {
         displayName:
             rawCovidData.province === null
                 ? rawCovidData.country
-                : rawCovidData.province,
+                : `${rawCovidData.province}, ${rawCovidData.country}`,
         _uid:
             rawCovidData.province === null
                 ? rawCovidData.country

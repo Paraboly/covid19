@@ -42,7 +42,7 @@ function processRawLicenseAttribs(
 ): LicenseAttribution[] {
     return _.chain(rawLicenseAttribDict)
         .mapValues((rawLicenseAttrib, name) => {
-            return { name, ...rawLicenseAttrib };
+            return { name, ..._.omit(rawLicenseAttrib, "parents") };
         })
         .values()
         .value();

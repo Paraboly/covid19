@@ -41,8 +41,8 @@
         "eject": "react-scripts eject",
         "prettier": "prettier --write --config .prettierrc **/src/**/*.ts **/src/**/*.tsx **/src/**/*.css **/src/**/*.scss",
         "tslint": "tslint --fix --config tslint.json ./src/**/*.ts ./src/**/*.tsx",
-        "license-crawl": "license-checker --json --out ./public/assets/generated/licenseAttribs.json",
-        "license-crawl-summary": "license-checker --summary"
+        "license-crawl": "npm-license-crawler --onlyDirectDependencies --dependencies --omitVersion --json ./public/assets/generated/licenseAttribs.json",
+        "license-crawl-display": "npm-license-crawler --onlyDirectDependencies --dependencies --omitVersion"
     },
     "eslintConfig": {
         "extends": "react-app"
@@ -58,7 +58,7 @@
         "@capacitor/cli": "1.3.0",
         "@testing-library/react": "^9.3.1",
         "@types/googlemaps": "^3.38.0",
-        "license-checker": "^25.0.1",
+        "npm-license-crawler": "^0.2.1",
         "prettier": "^2.0.2",
         "tslint": "^6.1.0",
         "tslint-react": "^4.2.0",

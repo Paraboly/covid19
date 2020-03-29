@@ -1,5 +1,5 @@
-#about-page {
-    .about-header {
+#info-page {
+    .info-header {
         background-color: #222;
         padding: 16px;
         width: 100%;
@@ -7,20 +7,20 @@
         text-align: center;
     }
 
-    .about-header img {
+    .info-header img {
         max-height: 100%;
     }
 
-    .about-info p {
+    .info-info p {
         color: var(--ion-color-dark);
         text-align: left;
     }
 
-    .about-info ion-icon {
+    .info-info ion-icon {
         margin-inline-end: 32px;
     }
 
-    .ios .about-info {
+    .ios .info-info {
         text-align: center;
     }
 }

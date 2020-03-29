@@ -15,15 +15,17 @@ import {
     IonItem,
     IonLabel,
     IonSelect,
-    IonPopover
+    IonPopover,
+    IonText,
+    IonInput
 } from "@ionic/react";
-import "./About.scss";
-import { calendar, pin, more } from "ionicons/icons";
+import "./Info.scss";
+import { calendar, pin, more, informationCircleOutline } from "ionicons/icons";
 import AboutPopover from "../components/AboutPopover";
 
-interface AboutProps {}
+interface InfoProps {}
 
-const About: React.FC<AboutProps> = () => {
+const Info: React.FC<InfoProps> = () => {
     const [showPopover, setShowPopover] = useState(false);
     const [popoverEvent, setPopoverEvent] = useState();
 
@@ -31,16 +33,15 @@ const About: React.FC<AboutProps> = () => {
         setPopoverEvent(e.nativeEvent);
         setShowPopover(true);
     };
-    const conferenceDate = "2047-05-17";
 
     return (
-        <IonPage id="about-page">
+        <IonPage id="info-page">
             <IonHeader>
                 <IonToolbar>
                     <IonButtons slot="start">
                         <IonMenuButton />
                     </IonButtons>
-                    <IonTitle>About</IonTitle>
+                    <IonTitle>Info</IonTitle>
                     <IonButtons slot="end">
                         <IonButton icon-only={true} onClick={presentPopover}>
                             <IonIcon slot="icon-only" icon={more} />
@@ -49,46 +50,32 @@ const About: React.FC<AboutProps> = () => {
                 </IonToolbar>
             </IonHeader>
             <IonContent>
-                <div className="about-header">
+                {/* <div className="info-header">
                     <img
                         src="assets/img/ionic-logo-white.svg"
                         alt="ionic logo"
                     />
-                </div>
-                <div className="about-info">
-                    <h4 className="ion-padding-start">Ionic Conference</h4>
-
+                </div> */}
+                <div className="info-info">
+                    <h4 className="ion-padding-bottom">Stay home, stay safe</h4>
                     <IonList lines="none">
-                        <IonItem>
-                            <IonIcon icon={calendar} slot="start" />
-                            <IonLabel position="stacked">Date</IonLabel>
-                            <IonDatetime
-                                displayFormat="MMM DD, YYYY"
-                                max="2056"
-                                value={conferenceDate}
+                        <IonItem
+                            href={
+                                "https://www.who.int/emergencies/diseases/novel-coronavirus-2019"
+                            }
+                            target={"_blank"}
+                        >
+                            <IonIcon
+                                icon={informationCircleOutline}
+                                slot="start"
                             />
-                        </IonItem>
-
-                        <IonItem>
-                            <IonIcon icon={pin} slot="start" />
-                            <IonLabel position="stacked">Location</IonLabel>
-                            <IonSelect>
-                                <IonSelectOption
-                                    value="madison"
-                                    selected={true}
-                                >
-                                    Madison, WI
-                                </IonSelectOption>
-                                <IonSelectOption value="austin">
-                                    Austin, TX
-                                </IonSelectOption>
-                                <IonSelectOption value="chicago">
-                                    Chicago, IL
-                                </IonSelectOption>
-                                <IonSelectOption value="seattle">
-                                    Seattle, WA
-                                </IonSelectOption>
-                            </IonSelect>
+                            <IonLabel position="stacked">Learn More</IonLabel>
+                            <IonInput
+                                readonly
+                                style={{ pointerEvents: "none" }}
+                            >
+                                World Health Organization
+                            </IonInput>
                         </IonItem>
                     </IonList>
 
@@ -115,4 +102,4 @@ const About: React.FC<AboutProps> = () => {
     );
 };
 
-export default React.memo(About);
+export default React.memo(Info);

@@ -39,8 +39,7 @@
         "build": "npm run license-crawl && react-scripts build",
         "test": "react-scripts test",
         "eject": "react-scripts eject",
-        "prettier": "prettier --write --config .prettierrc **/src/**/*.ts **/src/**/*.tsx **/src/**/*.css **/src/**/*.scss",
-        "tslint": "tslint --fix --config tslint.json ./src/**/*.ts ./src/**/*.tsx",
+        "lint": "tslint --fix --project tsconfig.json",
         "license-crawl": "npm-license-crawler --onlyDirectDependencies --dependencies --omitVersion --json ./public/assets/generated/licenseAttribs.json",
         "license-crawl-display": "npm-license-crawler --onlyDirectDependencies --dependencies --omitVersion"
     },
@@ -61,6 +60,8 @@
         "npm-license-crawler": "^0.2.1",
         "prettier": "^2.0.2",
         "tslint": "^6.1.0",
+        "tslint-config-prettier": "^1.18.0",
+        "tslint-plugin-prettier": "^2.3.0",
         "tslint-react": "^4.2.0",
         "typescript": "3.6.3"
     }

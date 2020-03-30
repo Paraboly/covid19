@@ -1,6 +1,7 @@
 {
-    "extends": ["tslint:recommended", "tslint-react"],
+    "extends": ["tslint:recommended", "tslint-react", "tslint-plugin-prettier", "tslint-config-prettier"],
     "rules": {
+        "prettier": true,
         "jsx-no-multiline-js": { "severity": "warn" },
         "no-console": { "severity": "warn" }
     }

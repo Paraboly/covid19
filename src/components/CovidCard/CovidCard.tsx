@@ -48,21 +48,21 @@ const CovidCard: React.FC<CovidCardProps> = ({
                                 color: "black"
                             }}
                         >
-                            {covidEntity.stats.confirmed}
+                            Cases: {covidEntity.stats.confirmed}
                         </span>
                         <span
                             style={{
                                 color: "red"
                             }}
                         >
-                            {covidEntity.stats.deaths}
+                            Deaths: {covidEntity.stats.deaths}
                         </span>
                         <span
                             style={{
                                 color: "blue"
                             }}
                         >
-                            {covidEntity.stats.recovered}
+                            Recovered: {covidEntity.stats.recovered}
                         </span>
                     </p>
                     <p>Updated: {covidEntity.updatedAt.toString()}</p>

@@ -49,7 +49,7 @@ const LatestNewsPage: React.FC<LatestNewsPageProps> = ({
     setSearchText,
     loadCovidData
 }) => {
-    const [segment, setSegment] = useState<"all" | "favorites">("all");
+    const [segment, setSegment] = useState<"all" | "watching">("all");
     const [, setShowFilterModal] = useState(false);
     const ionRefresherRef = useRef<HTMLIonRefresherElement>(null);
     const [showCompleteToast, setShowCompleteToast] = useState(false);
@@ -86,10 +86,10 @@ const LatestNewsPage: React.FC<LatestNewsPageProps> = ({
                             All
                         </IonSegmentButton>
                         <IonSegmentButton
-                            value="favorites"
-                            checked={segment === "favorites"}
+                            value="watching"
+                            checked={segment === "watching"}
                         >
-                            Favorites
+                            Watching
                         </IonSegmentButton>
                     </IonSegment>
 
@@ -132,7 +132,7 @@ const LatestNewsPage: React.FC<LatestNewsPageProps> = ({
                 <CovidEntityList
                     covidEntityGroups={covidEntitiesGroupedByCountry}
                     listType={segment}
-                    hide={segment === "favorites"}
+                    hide={segment === "watching"}
                 />
                 <CovidEntityList
                     covidEntityGroups={watchingCovidEntitiesGroupedByCountry}

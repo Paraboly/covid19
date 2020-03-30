@@ -4,9 +4,11 @@ import {
     IonItem,
     IonLabel,
     IonItemOptions,
-    IonItemOption
+    IonItemOption,
+    IonIcon
 } from "@ionic/react";
 import { CovidEntity } from "../../models/CovidEntity";
+import { eyeOff, eye } from "ionicons/icons";
 
 interface CovidCardProps {
     covidEntity: CovidEntity;
@@ -69,11 +71,17 @@ const CovidCard: React.FC<CovidCardProps> = ({
             <IonItemOptions>
                 {isWatching ? (
                     <IonItemOption color="danger" onClick={stopWatching}>
-                        Stop Watching
+                        <IonIcon
+                            icon={eyeOff}
+                            style={{ width: "75px", height: "25px" }}
+                        />
                     </IonItemOption>
                 ) : (
                     <IonItemOption color="favorite" onClick={startWatching}>
-                        Watch
+                        <IonIcon
+                            icon={eye}
+                            style={{ width: "75px", height: "25px" }}
+                        />
                     </IonItemOption>
                 )}
             </IonItemOptions>

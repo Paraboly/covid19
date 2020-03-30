@@ -1,8 +1,8 @@
 import React from "react";
 
 const STORIES = [
-    //🆕! Rendering Components instead of video or images can now be done by passing a 'content' property into the story.
-    //The props contain properties 'action'(fn) and 'isPaused'(bool)
+    // 🆕! Rendering Components instead of video or images can now be done by passing a 'content' property into the story.
+    // The props contain properties 'action'(fn) and 'isPaused'(bool)
     {
         content: (props: any) => {
             const handleClick = (e: React.MouseEvent) => {

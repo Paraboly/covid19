@@ -49,7 +49,7 @@ const CovidEntityList: React.FC<CovidEntityListProps> = ({
         return _.chain(covidEntityGroups)
             .mapValues((covidEntities, country) => (
                 <IonItemGroup key={`group-${country}`}>
-                    <IonItemDivider sticky>
+                    <IonItemDivider sticky={true}>
                         <IonLabel>{country}</IonLabel>
                     </IonItemDivider>
                     {renderGroup(covidEntities)}

@@ -94,7 +94,7 @@ const IonicApp: React.FC<IonicAppProps> = ({
                                 return <Redirect to="/tabs" />;
                             }}
                         />
-                        <Route path="/" component={HomeOrTutorial} exact />
+                        <Route path="/" component={HomeOrTutorial} exact={true} />
                     </IonRouterOutlet>
                 </IonSplitPane>
             </IonReactRouter>

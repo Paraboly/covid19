@@ -9,6 +9,7 @@ import {
 } from "@ionic/react";
 import { CovidEntity } from "../../models/CovidEntity";
 import { eyeOff, eye } from "ionicons/icons";
+import relativeDate from "relative-date";
 
 interface CovidCardProps {
     covidEntity: CovidEntity;
@@ -65,7 +66,13 @@ const CovidCard: React.FC<CovidCardProps> = ({
                             Recovered: {covidEntity.stats.recovered}
                         </span>
                     </p>
-                    <p>Updated: {covidEntity.updatedAt.toString()}</p>
+                    {covidEntity.isPseudo ? (
+                        <p>
+                            This is a sum of province data. May be inaccurate.
+                        </p>
+                    ) : (
+                        <p>Updated: {relativeDate(covidEntity.updatedAt)}</p>
+                    )}
                 </IonLabel>
             </IonItem>
             <IonItemOptions>

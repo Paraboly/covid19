@@ -95,6 +95,28 @@ function generatePseudoCovidEntities(covidData: CovidEntity[]): CovidEntity[] {
     return _.values(generatedCountryData);
 }
 
+function generateWorldwideEntity(data: CovidEntity[]): CovidEntity {
+    const countries = data.filter(d => d.isCountry);
+    return {
+        isPseudo: true,
+        country: "Worldwide",
+        province: "",
+        updatedAt: new Date(),
+        stats: {
+            confirmed: _.sumBy(countries, p => p.stats.confirmed),
+            deaths: _.sumBy(countries, p => p.stats.deaths),
+            recovered: _.sumBy(countries, p => p.stats.recovered)
+        },
+        coordinates: {
+            latitude: 0,
+            longitude: 0
+        },
+        isCountry: true,
+        displayName: "Worldwide",
+        _uid: "Worldwide"
+    } as CovidEntity;
+}
+
 export const getCovidData = async () => {
     const response = await Promise.all([
         fetch(locationsUrl),
@@ -109,10 +131,18 @@ export const getCovidData = async () => {
     );
 
     const pseudoCovidEntities = generatePseudoCovidEntities(processedCovidData);
+    const worldwideEntity = generateWorldwideEntity([
+        ...processedCovidData,
+        ...pseudoCovidEntities
+    ]);
 
     return {
         locations,
-        covidEntities: [...processedCovidData, ...pseudoCovidEntities]
+        covidEntities: [
+            ...processedCovidData,
+            ...pseudoCovidEntities,
+            worldwideEntity
+        ]
     };
 };
 

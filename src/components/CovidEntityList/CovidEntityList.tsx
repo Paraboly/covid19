@@ -45,17 +45,31 @@ const CovidEntityList: React.FC<CovidEntityListProps> = ({
         );
     }
 
+    function sortGroupsBySeverity(
+        groups: CountryToCovidEntitiesDict
+    ): { country: string; entities: CovidEntity[] }[] {
+        return _.chain(groups)
+            .mapValues((v, k) => {
+                return { country: k, entities: v };
+            })
+            .values()
+            .sortBy(g => _.find(g.entities, e => e.isCountry)!.stats.confirmed)
+            .reverse()
+            .value();
+    }
+
     function renderGroups(groups: CountryToCovidEntitiesDict) {
-        return _.chain(covidEntityGroups)
-            .mapValues((covidEntities, country) => (
-                <IonItemGroup key={`group-${country}`}>
+        const sorted = sortGroupsBySeverity(groups);
+
+        return _.chain(sorted)
+            .map(group => (
+                <IonItemGroup key={`group-${group.country}`}>
                     <IonItemDivider sticky={true}>
-                        <IonLabel>{country}</IonLabel>
+                        <IonLabel>{group.country}</IonLabel>
                     </IonItemDivider>
-                    {renderGroup(covidEntities)}
+                    {renderGroup(group.entities)}
                 </IonItemGroup>
             ))
-            .values()
             .value();
     }
 

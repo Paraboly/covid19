@@ -49,13 +49,19 @@ export const getWatchingCovidEntities = createSelector(
 export const getCovidEntititesGroupedByCountry = createSelector(
     getCovidEntities,
     entities =>
-        _.groupBy(entities, e => e.country) as CountryToCovidEntitiesDict
+        _.chain(entities)
+            .groupBy(e => e.country)
+            .mapValues(v => _.sortBy(v, d => d.stats.confirmed).reverse())
+            .value() as CountryToCovidEntitiesDict
 );
 
 export const getWatchingCovidEntitiesGroupedByCountry = createSelector(
     getWatchingCovidEntities,
     entities =>
-        _.groupBy(entities, e => e.country) as CountryToCovidEntitiesDict
+        _.chain(entities)
+            .groupBy(e => e.country)
+            .mapValues(v => _.sortBy(v, d => d.stats.confirmed).reverse())
+            .value() as CountryToCovidEntitiesDict
 );
 
 export const mapCenter = (state: AppState) => {

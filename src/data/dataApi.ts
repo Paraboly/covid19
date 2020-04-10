@@ -19,6 +19,7 @@ const USERNAME = "username";
 function processRawCovidData(rawCovidData: RawCovidEntity): CovidEntity {
     return {
         ...rawCovidData,
+        isPseudo: false,
         province: rawCovidData.province || "",
         updatedAt: new Date(rawCovidData.updatedAt),
         coordinates: {
@@ -48,6 +49,52 @@ function processRawLicenseAttribs(
         .value();
 }
 
+function generatePseudoCovidEntities(covidData: CovidEntity[]): CovidEntity[] {
+    const existingCountries = _.chain(covidData)
+        .filter(d => d.isCountry)
+        .map(d => d.country)
+        .uniq()
+        .value();
+
+    const allCountries = _.chain(covidData)
+        .map(d => d.country)
+        .uniq()
+        .value();
+
+    const missingCountries = _.difference(allCountries, existingCountries);
+
+    const provincesOfMissingCountries = _.chain(covidData)
+        .groupBy(d => d.country)
+        .pickBy((val, key) => missingCountries.includes(key))
+        .value();
+
+    const generatedCountryData = _.mapValues(
+        provincesOfMissingCountries,
+        (provinces, country) => {
+            return {
+                isPseudo: true,
+                country,
+                province: "",
+                updatedAt: new Date(),
+                stats: {
+                    confirmed: _.sumBy(provinces, p => p.stats.confirmed),
+                    deaths: _.sumBy(provinces, p => p.stats.deaths),
+                    recovered: _.sumBy(provinces, p => p.stats.recovered)
+                },
+                coordinates: {
+                    latitude: 0,
+                    longitude: 0
+                },
+                isCountry: true,
+                displayName: country,
+                _uid: country
+            } as CovidEntity;
+        }
+    );
+
+    return _.values(generatedCountryData);
+}
+
 export const getCovidData = async () => {
     const response = await Promise.all([
         fetch(locationsUrl),
@@ -61,9 +108,11 @@ export const getCovidData = async () => {
         processRawCovidData(rawData)
     );
 
+    const pseudoCovidEntities = generatePseudoCovidEntities(processedCovidData);
+
     return {
         locations,
-        covidEntities: processedCovidData
+        covidEntities: [...processedCovidData, ...pseudoCovidEntities]
     };
 };
 

@@ -18,17 +18,21 @@ export const getSearchedEntities = createSelector(
         if (!searchText) {
             return entities;
         }
+
+        const phrase = searchText.toLowerCase();
+
         return entities.filter(entity => {
+            if (["pseudo", "generated"].includes(phrase)) {
+                return entity.isPseudo;
+            }
+
             const countryNameMatches =
-                entity.country.toLowerCase().indexOf(searchText.toLowerCase()) >
-                -1;
+                entity.country.toLowerCase().indexOf(phrase) > -1;
 
             return entity.isCountry
                 ? countryNameMatches
                 : countryNameMatches ||
-                      entity.province
-                          .toLowerCase()
-                          .indexOf(searchText.toLowerCase()) > -1;
+                      entity.province.toLowerCase().indexOf(phrase) > -1;
         });
     }
 );

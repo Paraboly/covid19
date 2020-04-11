@@ -16,13 +16,13 @@ import "./Tutorial.scss";
 import { connect } from "../data/connect";
 import { RouteComponentProps } from "react-router";
 
-interface OwnProps extends RouteComponentProps {}
+interface OwnProps extends RouteComponentProps { }
 
 interface DispatchProps {
     setHasSeenTutorial: typeof setHasSeenTutorial;
 }
 
-interface TutorialProps extends OwnProps, DispatchProps {}
+interface TutorialProps extends OwnProps, DispatchProps { }
 
 const Tutorial: React.FC<TutorialProps> = ({ history, setHasSeenTutorial }) => {
     const [showSkip, setShowSkip] = useState(true);
@@ -30,7 +30,7 @@ const Tutorial: React.FC<TutorialProps> = ({ history, setHasSeenTutorial }) => {
 
     const startApp = async () => {
         await setHasSeenTutorial(true);
-        history.push("/tabs/map", { direction: "none" });
+        history.push("/tabs/covidMap", { direction: "none" });
     };
 
     const handleSlideChangeStart = () => {

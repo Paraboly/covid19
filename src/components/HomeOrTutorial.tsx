@@ -8,10 +8,10 @@ interface StateProps {
 
 const HomeOrTutorial: React.FC<StateProps> = ({ hasSeenTutorial }) => {
     return hasSeenTutorial ? (
-        <Redirect to="/tabs/map" />
+        <Redirect to="/tabs/covidMap" />
     ) : (
-        <Redirect to="/tutorial" />
-    );
+            <Redirect to="/tutorial" />
+        );
 };
 
 export default connect<{}, StateProps, {}>({

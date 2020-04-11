@@ -10,17 +10,17 @@ import {
 import { Route, Redirect } from "react-router";
 import { map, informationCircle, listBox } from "ionicons/icons";
 import CovidDetails from "./CovidDetails/CovidDetails";
-import MapView from "./Map/MapView";
+import CovidMap from "./CovidMap/CovidMap";
 import Info from "./Info";
 import Acknowledgements from "./Acknowledgements/Acknowledgements";
 
-interface MainTabsProps {}
+interface MainTabsProps { }
 
 const MainTabs: React.FC<MainTabsProps> = () => {
     return (
         <IonTabs>
             <IonRouterOutlet>
-                <Redirect exact={true} path="/tabs" to="/tabs/map" />
+                <Redirect exact={true} path="/tabs" to="/tabs/covidMap" />
                 {/*
                   Using the render method prop cuts down the number of renders your components will have due to route changes.
                   Use the component prop when your component depends on the RouterComponentProps passed in automatically.
@@ -31,8 +31,8 @@ const MainTabs: React.FC<MainTabsProps> = () => {
                     exact={true}
                 />
                 <Route
-                    path="/tabs/map"
-                    render={() => <MapView />}
+                    path="/tabs/covidMap"
+                    render={() => <CovidMap />}
                     exact={true}
                 />
                 <Route path="/tabs/info" render={() => <Info />} exact={true} />
@@ -42,7 +42,7 @@ const MainTabs: React.FC<MainTabsProps> = () => {
                 />
             </IonRouterOutlet>
             <IonTabBar slot="bottom">
-                <IonTabButton tab="map" href="/tabs/map">
+                <IonTabButton tab="map" href="/tabs/covidMap">
                     <IonIcon icon={map} />
                     <IonLabel>Map</IonLabel>
                 </IonTabButton>

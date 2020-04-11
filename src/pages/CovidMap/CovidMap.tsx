@@ -1,9 +1,9 @@
 /* eslint-disable @typescript-eslint/no-namespace */
 import React, { useRef } from "react";
-import Stories from "react-insta-stories";
 import "mapbox-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
 import "@paraboly/pwc-map";
+import CovidStoryPanel from "../../components/CovidStoryPanel/CovidStoryPanel";
 
 import {
     IonHeader,
@@ -14,10 +14,12 @@ import {
     IonContent,
     IonPage
 } from "@ionic/react";
+
 import { Location } from "../../models/Location";
 import { connect } from "../../data/connect";
 import * as selectors from "../../data/selectors";
-import "./MapView.scss";
+import "./CovidMap.scss";
+import { CountryToCovidEntitiesDict } from '../../models/CountryToCovidEntitiesDict';
 
 declare global {
     namespace JSX {
@@ -38,43 +40,26 @@ declare global {
     }
 }
 
-const STORIES: any = [
-    {
-        header: {
-            heading: "Turkey",
-            subheading: "Posted 5h ago",
-            profileImage: "https://picsum.photos/1000/1000"
-        },
-        content: ""
-    },
-    {
-        header: {
-            heading: "Italy",
-            subheading: "Posted 2h ago",
-            profileImage: "https://picsum.photos/1000/1000"
-        },
-        content: ""
-    }
-];
+interface OwnProps {
 
-interface OwnProps {}
+}
 
 interface StateProps {
-    locations: Location[];
+    watchingCovidEntityUids: string[];
     mapCenter: Location;
 }
 
-interface DispatchProps {}
+interface DispatchProps { }
 
-interface MapViewProps extends OwnProps, StateProps, DispatchProps {}
+interface CovidMapProps extends OwnProps, StateProps, DispatchProps { }
 
-const MapView: React.FC<MapViewProps> = ({ locations, mapCenter }) => {
+const CovidMap: React.FC<CovidMapProps> = ({ watchingCovidEntityUids, mapCenter }) => {
     const pwcMap = useRef<HTMLDivElement>(null);
 
     if (pwcMap.current) {
         startMap(pwcMap.current);
     }
-
+    console.log(watchingCovidEntityUids);
     return (
         <IonPage id="map-view">
             <IonHeader>
@@ -87,13 +72,7 @@ const MapView: React.FC<MapViewProps> = ({ locations, mapCenter }) => {
             </IonHeader>
 
             <IonContent class="map-page">
-                <div className="story-panel">
-                    <Stories
-                        stories={STORIES}
-                        defaultInterval={20000}
-                        loop={true}
-                    />
-                </div>
+                <CovidStoryPanel />
                 <pwc-map ref={pwcMap}>
                     <pwc-map-geojson-layer />
                     <pwc-map-corona />
@@ -105,13 +84,12 @@ const MapView: React.FC<MapViewProps> = ({ locations, mapCenter }) => {
 
 const startMap = (pwcMap: HTMLElement) => {
     pwcMap.classList.add("show-map");
-    console.log("MapStarted: ", pwcMap);
 };
 
 export default connect<OwnProps, StateProps, DispatchProps>({
     mapStateToProps: state => ({
-        locations: state.covid.locations,
+        watchingCovidEntityUids: state.covid.watchingCovidEntityUids,
         mapCenter: selectors.mapCenter(state)
     }),
-    component: MapView
+    component: CovidMap
 });

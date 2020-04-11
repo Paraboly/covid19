@@ -1,0 +1,24 @@
+#map-story-panel {
+    position: relative;
+    & > div {
+        width: 100% !important;
+        height: 20px !important;
+        background: transparent !important;
+
+        & > div:nth-child(2) {
+            width: 100% !important;
+            position: absolute !important;
+            height: 60px !important;
+
+            & > {
+                img,
+                div:nth-child(3) {
+                    display: none !important;
+                }
+                div:nth-child(2) {
+                    color: rgba(0, 0, 0, 0.9) !important;
+                }
+            }
+        }
+    }
+}

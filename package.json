@@ -13,7 +13,7 @@
         "@capacitor/core": "1.3.0",
         "@ionic/react": "^4.11.4",
         "@ionic/react-router": "^4.11.4",
-        "@paraboly/pwc-map": "^0.0.4",
+        "@paraboly/pwc-map": "^0.0.6",
         "@types/jest": "24.0.18",
         "@types/lodash": "^4.14.149",
         "@types/node": "12.7.5",
@@ -33,7 +33,8 @@
         "react-router-dom": "^5.0.1",
         "react-scripts": "3.2.0",
         "relative-date": "^1.1.3",
-        "reselect": "^4.0.0"
+        "reselect": "^4.0.0",
+        "svg-country-flags": "^1.2.7"
     },
     "scripts": {
         "start": "npm run license-crawl && react-scripts start",

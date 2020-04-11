@@ -20,7 +20,7 @@ import { setDarkMode } from "../data/user/user.actions";
 
 const routes = {
     appPages: [
-        { title: "Map", path: "/tabs/map", icon: map },
+        { title: "Map", path: "/tabs/covidMap", icon: map },
         { title: "List", path: "/tabs/covidDetails", icon: listBox },
         { title: "Info", path: "/tabs/info", icon: informationCircle }
     ]
@@ -41,7 +41,7 @@ interface DispatchProps {
     setDarkMode: typeof setDarkMode;
 }
 
-interface MenuProps extends RouteComponentProps, StateProps, DispatchProps {}
+interface MenuProps extends RouteComponentProps, StateProps, DispatchProps { }
 
 const Menu: React.FC<MenuProps> = ({ darkMode, history, setDarkMode }) => {
     const [disableMenu, setDisableMenu] = useState(false);

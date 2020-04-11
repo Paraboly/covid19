@@ -58,7 +58,6 @@
     "description": "Shows the current coronavirus situation in where you live and around the world.",
     "devDependencies": {
         "@capacitor/cli": "1.3.0",
-        "@stencil/core": "^1.12.3",
         "@testing-library/react": "^9.3.1",
         "@types/googlemaps": "^3.38.0",
         "npm-license-crawler": "^0.2.1",

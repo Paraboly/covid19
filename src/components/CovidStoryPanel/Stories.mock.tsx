@@ -25,7 +25,7 @@ const STORIES = [
             <div style={{ width: "100%", height: "100%" }}>Hello</div>
         ),
         header: {
-            heading: "Mohit Karekar",
+            heading: "Turkey",
             subheading: "Posted 5h ago",
             profileImage: "https://picsum.photos/1000/1000"
         }

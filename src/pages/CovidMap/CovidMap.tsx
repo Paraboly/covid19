@@ -2,7 +2,7 @@
 import React, { useRef } from "react";
 import "mapbox-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
-import "@paraboly/pwc-map";
+import PwcMapStoryModel from "@paraboly/pwc-map/dist/types/components/PwcMapStory/PwcMapStoryModel";
 import CovidStoryPanel from "../../components/CovidStoryPanel/CovidStoryPanel";
 
 import {
@@ -14,7 +14,6 @@ import {
     IonContent,
     IonPage
 } from "@ionic/react";
-
 import { Location } from "../../models/Location";
 import { connect } from "../../data/connect";
 import * as selectors from "../../data/selectors";
@@ -31,7 +30,7 @@ declare global {
                 React.HTMLAttributes<HTMLElement>,
                 HTMLElement
             >;
-            "pwc-map-corona": React.DetailedHTMLProps<
+            "pwc-map-story": React.DetailedHTMLProps<
                 React.HTMLAttributes<HTMLElement>,
                 HTMLElement
             >;
@@ -39,27 +38,27 @@ declare global {
     }
 }
 
-interface OwnProps {}
+interface OwnProps { }
 
 interface StateProps {
     watchingCovidEntityUids: string[];
     mapCenter: Location;
 }
 
-interface DispatchProps {}
+interface DispatchProps { }
 
-interface CovidMapProps extends OwnProps, StateProps, DispatchProps {}
+interface CovidMapProps extends OwnProps, StateProps, DispatchProps { }
 
 const CovidMap: React.FC<CovidMapProps> = ({
     watchingCovidEntityUids,
     mapCenter
 }) => {
     const pwcMap = useRef<HTMLDivElement>(null);
+    const stories: [PwcMapStoryModel] | [] = [];
 
     if (pwcMap.current) {
         startMap(pwcMap.current);
     }
-    console.log(watchingCovidEntityUids);
     return (
         <IonPage id="map-view">
             <IonHeader>
@@ -75,7 +74,7 @@ const CovidMap: React.FC<CovidMapProps> = ({
                 <CovidStoryPanel />
                 <pwc-map ref={pwcMap}>
                     <pwc-map-geojson-layer />
-                    <pwc-map-corona />
+                    <pwc-map-story />
                 </pwc-map>
             </IonContent>
         </IonPage>

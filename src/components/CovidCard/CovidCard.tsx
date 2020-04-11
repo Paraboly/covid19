@@ -10,6 +10,7 @@ import {
 import { CovidEntity } from "../../models/CovidEntity";
 import { eyeOff, eye } from "ionicons/icons";
 import relativeDate from "relative-date";
+import { toHumanString } from "human-readable-numbers";
 
 interface CovidCardProps {
     covidEntity: CovidEntity;
@@ -49,21 +50,22 @@ const CovidCard: React.FC<CovidCardProps> = ({
                                 color: "black"
                             }}
                         >
-                            Cases: {covidEntity.stats.confirmed}
+                            Cases: {toHumanString(covidEntity.stats.confirmed)}
                         </span>
                         <span
                             style={{
                                 color: "red"
                             }}
                         >
-                            Deaths: {covidEntity.stats.deaths}
+                            Deaths: {toHumanString(covidEntity.stats.deaths)}
                         </span>
                         <span
                             style={{
                                 color: "blue"
                             }}
                         >
-                            Recovered: {covidEntity.stats.recovered}
+                            Recovered:{" "}
+                            {toHumanString(covidEntity.stats.recovered)}
                         </span>
                     </p>
                     {covidEntity.isPseudo ? (

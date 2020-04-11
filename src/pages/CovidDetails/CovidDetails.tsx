@@ -23,13 +23,13 @@ import "./CovidDetails.scss";
 import * as selectors from "../../data/selectors";
 import { setSearchText, loadCovidData } from "../../data/covid/covid.actions";
 import ShareSocialFab from "../../components/ShareSocialFab";
-import { CountryToCovidEntitiesDict } from "../../models/CountryToCovidEntitiesDict";
+import { CountryCovidEntityGroup } from "../../models/CountryCovidEntityGroup";
 
 interface OwnProps {}
 
 interface StateProps {
-    covidEntitiesGroupedByCountry: CountryToCovidEntitiesDict;
-    watchingCovidEntitiesGroupedByCountry: CountryToCovidEntitiesDict;
+    covidEntitiesGroupedByCountry: CountryCovidEntityGroup[];
+    watchingCovidEntitiesGroupedByCountry: CountryCovidEntityGroup[];
     mode: "ios" | "md";
     isLoading: boolean;
 }

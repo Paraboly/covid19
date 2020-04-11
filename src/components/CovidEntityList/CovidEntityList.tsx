@@ -10,12 +10,11 @@ import { connect } from "../../data/connect";
 import { startWatching, stopWatching } from "../../data/covid/covid.actions";
 import CovidCard from "../CovidCard/CovidCard";
 import { CovidEntity } from "../../models/CovidEntity";
-import { CountryToCovidEntitiesDict } from "../../models/CountryToCovidEntitiesDict";
 import _ from "lodash";
-import { group } from "console";
+import { CountryCovidEntityGroup } from "../../models/CountryCovidEntityGroup";
 
 interface OwnProps {
-    covidEntityGroups: CountryToCovidEntitiesDict;
+    covidEntityGroups: CountryCovidEntityGroup[];
     hide: boolean;
 }
 
@@ -45,35 +44,8 @@ const CovidEntityList: React.FC<CovidEntityListProps> = ({
         );
     }
 
-    function sortGroupsBySeverity(
-        groups: CountryToCovidEntitiesDict
-    ): { country: string; entities: CovidEntity[] }[] {
-        return (
-            _.chain(groups)
-                .mapValues((v, k) => {
-                    return { country: k, entities: v };
-                })
-                .values()
-                /** This is not the real intended behaviour. Ideally we should sort on the country total.
-                 * But if the country is not selected as a favorite, the code blows up and burns in ashes.
-                 * This whole sorting ordeal should be handled in selectors and it requires some data
-                 * structure changed, namely:
-                 * From this: { [key: string]: CovidEntities[] }
-                 * To this  : { country: string, entities: CovidEntity[]}[]
-                 * This allows us to do sorting on the groups with some lodash magic, as it is basically an
-                 * array now.
-                 * (Tarık, 2020/04/10)
-                 */
-                .sortBy(g => g.entities[0].stats.confirmed)
-                .reverse()
-                .value()
-        );
-    }
-
-    function renderGroups(groups: CountryToCovidEntitiesDict) {
-        const sorted = sortGroupsBySeverity(groups);
-
-        return _.chain(sorted)
+    function renderGroups(groups: CountryCovidEntityGroup[]) {
+        return _.chain(groups)
             .map(group => (
                 <IonItemGroup key={`group-${group.country}`}>
                     <IonItemDivider sticky={true}>

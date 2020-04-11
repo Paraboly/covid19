@@ -49,7 +49,7 @@ const LatestNewsPage: React.FC<LatestNewsPageProps> = ({
     setSearchText,
     loadCovidData
 }) => {
-    const [segment, setSegment] = useState<"all" | "watching">("all");
+    const [segment, setSegment] = useState<"all" | "watching">("watching");
     const [, setShowFilterModal] = useState(false);
     const ionRefresherRef = useRef<HTMLIonRefresherElement>(null);
     const [showCompleteToast, setShowCompleteToast] = useState(false);
@@ -80,16 +80,16 @@ const LatestNewsPage: React.FC<LatestNewsPageProps> = ({
                         onIonChange={e => setSegment(e.detail.value as any)}
                     >
                         <IonSegmentButton
-                            value="all"
-                            checked={segment === "all"}
-                        >
-                            All
-                        </IonSegmentButton>
-                        <IonSegmentButton
                             value="watching"
                             checked={segment === "watching"}
                         >
                             Watching
+                        </IonSegmentButton>
+                        <IonSegmentButton
+                            value="all"
+                            checked={segment === "all"}
+                        >
+                            All
                         </IonSegmentButton>
                     </IonSegment>
 

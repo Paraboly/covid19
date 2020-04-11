@@ -5,14 +5,15 @@ import { CountryCovidEntityGroup } from "../models/CountryCovidEntityGroup";
 import { CovidEntity } from "../models/CovidEntity";
 
 const getEntities = (state: AppState) => state.covid.covidEntities;
-const getCountries = createSelector(getEntities, entities =>
-    _.filter(entities, { isCountry: true })
-);
 const getWatchingCovidEntityUids = (state: AppState) =>
     state.covid.watchingCovidEntityUids;
 const getSearchText = (state: AppState) => state.covid.searchText;
 
 export const getIsLoading = (state: AppState) => state.covid.loading || false;
+
+export const getCountryEntities = createSelector(getEntities, entities =>
+    _.filter(entities, { isCountry: true })
+);
 
 export const getFilteredEntities = createSelector(getEntities, x => x);
 
@@ -51,33 +52,14 @@ export const getWatchingCovidEntities = createSelector(
         entities.filter(x => watchingCovidEntityUids.indexOf(x._uid) > -1)
 );
 
-const groupAndSortEntities = (
-    allCountries: CovidEntity[],
-    relevantEntities: CovidEntity[]
-): CountryCovidEntityGroup[] => {
-    return _.chain(relevantEntities)
-        .groupBy(e => e.country)
-        .mapValues((v, k) => {
-            return {
-                country: k,
-                severity: getCountrySeverity(allCountries, k),
-                entities: _.sortBy(v, d => d.stats.confirmed).reverse()
-            };
-        })
-        .values()
-        .sortBy(g => g.severity)
-        .reverse()
-        .value() as CountryCovidEntityGroup[];
-};
-
 export const getCovidEntititesGroupedByCountry = createSelector(
-    getCountries,
+    getCountryEntities,
     getCovidEntities,
     groupAndSortEntities
 );
 
 export const getWatchingCovidEntitiesGroupedByCountry = createSelector(
-    getCountries,
+    getCountryEntities,
     getWatchingCovidEntities,
     groupAndSortEntities
 );
@@ -113,4 +95,23 @@ function getCountrySeverity(countries: CovidEntity[], country: string) {
     }
 
     return matchingCountries[0].stats.confirmed;
+}
+
+function groupAndSortEntities(
+    allCountries: CovidEntity[],
+    relevantEntities: CovidEntity[]
+): CountryCovidEntityGroup[] {
+    return _.chain(relevantEntities)
+        .groupBy(e => e.country)
+        .mapValues((v, k) => {
+            return {
+                country: k,
+                severity: getCountrySeverity(allCountries, k),
+                entities: _.sortBy(v, d => d.stats.confirmed).reverse()
+            };
+        })
+        .values()
+        .sortBy(g => g.severity)
+        .reverse()
+        .value() as CountryCovidEntityGroup[];
 }

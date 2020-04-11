@@ -19,7 +19,6 @@ import { Location } from "../../models/Location";
 import { connect } from "../../data/connect";
 import * as selectors from "../../data/selectors";
 import "./CovidMap.scss";
-import { CountryToCovidEntitiesDict } from '../../models/CountryToCovidEntitiesDict';
 
 declare global {
     namespace JSX {
@@ -40,20 +39,21 @@ declare global {
     }
 }
 
-interface OwnProps {
-
-}
+interface OwnProps {}
 
 interface StateProps {
     watchingCovidEntityUids: string[];
     mapCenter: Location;
 }
 
-interface DispatchProps { }
+interface DispatchProps {}
 
-interface CovidMapProps extends OwnProps, StateProps, DispatchProps { }
+interface CovidMapProps extends OwnProps, StateProps, DispatchProps {}
 
-const CovidMap: React.FC<CovidMapProps> = ({ watchingCovidEntityUids, mapCenter }) => {
+const CovidMap: React.FC<CovidMapProps> = ({
+    watchingCovidEntityUids,
+    mapCenter
+}) => {
     const pwcMap = useRef<HTMLDivElement>(null);
 
     if (pwcMap.current) {

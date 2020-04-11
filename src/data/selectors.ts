@@ -1,7 +1,7 @@
 import { createSelector } from "reselect";
 import { AppState } from "./state";
 import _ from "lodash";
-import { CountryToCovidEntitiesDict } from "../models/CountryToCovidEntitiesDict";
+import { CountryCovidEntityGroup } from "../models/CountryCovidEntityGroup";
 
 const getEntities = (state: AppState) => state.covid.covidEntities;
 const getWatchingCovidEntityUids = (state: AppState) =>
@@ -51,8 +51,18 @@ export const getCovidEntititesGroupedByCountry = createSelector(
     entities =>
         _.chain(entities)
             .groupBy(e => e.country)
-            .mapValues(v => _.sortBy(v, d => d.stats.confirmed).reverse())
-            .value() as CountryToCovidEntitiesDict
+            .mapValues((v, k) => {
+                const sortedEntities = _.sortBy(
+                    v,
+                    d => d.stats.confirmed
+                ).reverse();
+                return {
+                    country: k,
+                    entities: sortedEntities
+                };
+            })
+            .values()
+            .value() as CountryCovidEntityGroup[]
 );
 
 export const getWatchingCovidEntitiesGroupedByCountry = createSelector(
@@ -60,8 +70,18 @@ export const getWatchingCovidEntitiesGroupedByCountry = createSelector(
     entities =>
         _.chain(entities)
             .groupBy(e => e.country)
-            .mapValues(v => _.sortBy(v, d => d.stats.confirmed).reverse())
-            .value() as CountryToCovidEntitiesDict
+            .mapValues((v, k) => {
+                const sortedEntities = _.sortBy(
+                    v,
+                    d => d.stats.confirmed
+                ).reverse();
+                return {
+                    country: k,
+                    entities: sortedEntities
+                };
+            })
+            .values()
+            .value() as CountryCovidEntityGroup[]
 );
 
 export const mapCenter = (state: AppState) => {

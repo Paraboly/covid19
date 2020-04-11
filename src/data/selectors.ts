@@ -2,11 +2,16 @@ import { createSelector } from "reselect";
 import { AppState } from "./state";
 import _ from "lodash";
 import { CountryCovidEntityGroup } from "../models/CountryCovidEntityGroup";
+import { CovidEntity } from "../models/CovidEntity";
 
 const getEntities = (state: AppState) => state.covid.covidEntities;
+const getCountries = createSelector(getEntities, entities =>
+    _.filter(entities, { isCountry: true })
+);
 const getWatchingCovidEntityUids = (state: AppState) =>
     state.covid.watchingCovidEntityUids;
 const getSearchText = (state: AppState) => state.covid.searchText;
+
 export const getIsLoading = (state: AppState) => state.covid.loading || false;
 
 export const getFilteredEntities = createSelector(getEntities, x => x);
@@ -46,42 +51,35 @@ export const getWatchingCovidEntities = createSelector(
         entities.filter(x => watchingCovidEntityUids.indexOf(x._uid) > -1)
 );
 
+const groupAndSortEntities = (
+    allCountries: CovidEntity[],
+    relevantEntities: CovidEntity[]
+): CountryCovidEntityGroup[] => {
+    return _.chain(relevantEntities)
+        .groupBy(e => e.country)
+        .mapValues((v, k) => {
+            return {
+                country: k,
+                severity: getCountrySeverity(allCountries, k),
+                entities: _.sortBy(v, d => d.stats.confirmed).reverse()
+            };
+        })
+        .values()
+        .sortBy(g => g.severity)
+        .reverse()
+        .value() as CountryCovidEntityGroup[];
+};
+
 export const getCovidEntititesGroupedByCountry = createSelector(
+    getCountries,
     getCovidEntities,
-    entities =>
-        _.chain(entities)
-            .groupBy(e => e.country)
-            .mapValues((v, k) => {
-                const sortedEntities = _.sortBy(
-                    v,
-                    d => d.stats.confirmed
-                ).reverse();
-                return {
-                    country: k,
-                    entities: sortedEntities
-                };
-            })
-            .values()
-            .value() as CountryCovidEntityGroup[]
+    groupAndSortEntities
 );
 
 export const getWatchingCovidEntitiesGroupedByCountry = createSelector(
+    getCountries,
     getWatchingCovidEntities,
-    entities =>
-        _.chain(entities)
-            .groupBy(e => e.country)
-            .mapValues((v, k) => {
-                const sortedEntities = _.sortBy(
-                    v,
-                    d => d.stats.confirmed
-                ).reverse();
-                return {
-                    country: k,
-                    entities: sortedEntities
-                };
-            })
-            .values()
-            .value() as CountryCovidEntityGroup[]
+    groupAndSortEntities
 );
 
 export const mapCenter = (state: AppState) => {
@@ -102,3 +100,17 @@ export const mapCenter = (state: AppState) => {
 export const licenseAttributions = (state: AppState) => {
     return state.static.licenseAttributions;
 };
+
+function getCountrySeverity(countries: CovidEntity[], country: string) {
+    const matchingCountries = _.filter(countries, {
+        country
+    });
+
+    if (matchingCountries.length !== 1) {
+        throw new Error(
+            `We found multiple country entities with the key ${country}. Needs investigaiton`
+        );
+    }
+
+    return matchingCountries[0].stats.confirmed;
+}

@@ -93,7 +93,7 @@ const LatestNewsPage: React.FC<LatestNewsPageProps> = ({
                         </IonSegmentButton>
                     </IonSegment>
 
-                    <IonButtons slot="end">
+                    {/* <IonButtons slot="end">
                         <IonButton onClick={() => setShowFilterModal(true)}>
                             {mode === "ios" ? (
                                 "Filter"
@@ -101,7 +101,7 @@ const LatestNewsPage: React.FC<LatestNewsPageProps> = ({
                                 <IonIcon icon={options} slot="icon-only" />
                             )}
                         </IonButton>
-                    </IonButtons>
+                    </IonButtons> */}
                 </IonToolbar>
 
                 <IonToolbar>

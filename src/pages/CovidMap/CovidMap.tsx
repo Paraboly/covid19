@@ -2,21 +2,14 @@
 import React, { useRef } from "react";
 import "mapbox-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
-import PwcMapStoryModel from "@paraboly/pwc-map/dist/types/components/PwcMapStory/PwcMapStoryModel";
 import CovidStoryPanel from "../../components/CovidStoryPanel/CovidStoryPanel";
 
 import {
-    IonHeader,
-    IonToolbar,
-    IonButtons,
-    IonMenuButton,
-    IonTitle,
     IonContent,
     IonPage
 } from "@ionic/react";
-import { Location } from "../../models/Location";
+
 import { connect } from "../../data/connect";
-import * as selectors from "../../data/selectors";
 import "./CovidMap.scss";
 
 declare global {
@@ -40,36 +33,21 @@ declare global {
 
 interface OwnProps { }
 
-interface StateProps {
-    watchingCovidEntityUids: string[];
-    mapCenter: Location;
-}
+interface StateProps { }
 
 interface DispatchProps { }
 
 interface CovidMapProps extends OwnProps, StateProps, DispatchProps { }
 
 const CovidMap: React.FC<CovidMapProps> = ({
-    watchingCovidEntityUids,
-    mapCenter
 }) => {
     const pwcMap = useRef<HTMLDivElement>(null);
-    const stories: [PwcMapStoryModel] | [] = [];
 
     if (pwcMap.current) {
         startMap(pwcMap.current);
     }
     return (
         <IonPage id="map-view">
-            <IonHeader>
-                <IonToolbar>
-                    <IonButtons slot="start">
-                        <IonMenuButton />
-                    </IonButtons>
-                    <IonTitle>Map</IonTitle>
-                </IonToolbar>
-            </IonHeader>
-
             <IonContent class="map-page">
                 <CovidStoryPanel />
                 <pwc-map ref={pwcMap}>
@@ -86,9 +64,5 @@ const startMap = (pwcMap: HTMLElement) => {
 };
 
 export default connect<OwnProps, StateProps, DispatchProps>({
-    mapStateToProps: state => ({
-        watchingCovidEntityUids: state.covid.watchingCovidEntityUids,
-        mapCenter: selectors.mapCenter(state)
-    }),
     component: CovidMap
 });

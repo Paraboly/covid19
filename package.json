@@ -24,7 +24,7 @@
         "date-fns": "^2.6.0",
         "ionicons": "^4.6.3",
         "lodash": "^4.17.15",
-        "mapbox-gl": "^1.9.0",
+        "mapbox-gl": "^1.13.3",
         "node-sass": "^4.13.0",
         "react": "^16.9.0",
         "react-dom": "^16.9.0",
